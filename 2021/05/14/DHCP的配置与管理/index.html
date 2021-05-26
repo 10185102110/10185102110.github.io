@@ -1,0 +1,334 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>DHCP的配置与管理 | 浮生孰来</title><meta name="keywords" content="Server、DHCP"><meta name="author" content="Ave Bai"><meta name="copyright" content="Ave Bai"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="DHCP的配置与管理一、基础知识 什么是DHCP– 全称：Dynamic Host Configuration Protocol ，动态主机配置协议  – 是一个局域网的网络协议，使用UDP协议工作  – 中、大型网络中手动分配IP地址的方法不合适 ，DHCP可高效分配IP地址   DHCP的主要功能–为内部网络自动分配IP地址  – 中央管理所有计算机的手段  DHCP服务优点– 集中验证IP地">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DHCP的配置与管理">
+<meta property="og:url" content="http://10185102110.github.io/2021/05/14/DHCP%E7%9A%84%E9%85%8D%E7%BD%AE%E4%B8%8E%E7%AE%A1%E7%90%86/index.html">
+<meta property="og:site_name" content="浮生孰来">
+<meta property="og:description" content="DHCP的配置与管理一、基础知识 什么是DHCP– 全称：Dynamic Host Configuration Protocol ，动态主机配置协议  – 是一个局域网的网络协议，使用UDP协议工作  – 中、大型网络中手动分配IP地址的方法不合适 ，DHCP可高效分配IP地址   DHCP的主要功能–为内部网络自动分配IP地址  – 中央管理所有计算机的手段  DHCP服务优点– 集中验证IP地">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://10185102110.github.io/img/3.jpg">
+<meta property="article:published_time" content="2021-05-14T13:46:49.000Z">
+<meta property="article:modified_time" content="2021-05-16T08:14:46.305Z">
+<meta property="article:author" content="Ave Bai">
+<meta property="article:tag" content="Server、DHCP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://10185102110.github.io/img/3.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://10185102110.github.io/2021/05/14/DHCP%E7%9A%84%E9%85%8D%E7%BD%AE%E4%B8%8E%E7%AE%A1%E7%90%86/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="baidu_site_verification"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?211d055ab9f6b88805047adca6ce783d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'DHCP的配置与管理',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-05-16 16:14:46'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><link rel="stylesheet" href="/css/bilibili.css"><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="浮生孰来" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">9</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/picture/"><i class="fa-fw fas fa-camera"></i><span> 图库</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/3.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">浮生孰来</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/picture/"><i class="fa-fw fas fa-camera"></i><span> 图库</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">DHCP的配置与管理</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-05-14T13:46:49.000Z" title="发表于 2021-05-14 21:46:49">2021-05-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-05-16T08:14:46.305Z" title="更新于 2021-05-16 16:14:46">2021-05-16</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Server/">Server</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>3分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="DHCP的配置与管理"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="DHCP的配置与管理"><a href="#DHCP的配置与管理" class="headerlink" title="DHCP的配置与管理"></a>DHCP的配置与管理</h1><h2 id="一、基础知识"><a href="#一、基础知识" class="headerlink" title="一、基础知识"></a>一、基础知识</h2><ol>
+<li><h3 id="什么是DHCP"><a href="#什么是DHCP" class="headerlink" title="什么是DHCP"></a>什么是DHCP</h3><p>– 全称：Dynamic Host Configuration Protocol ，动态主机配置协议 </p>
+<p>– 是一个局域网的网络协议，使用UDP协议工作 </p>
+<p>– 中、大型网络中手动分配IP地址的方法不合适 ，DHCP可高效分配IP地址 </p>
+</li>
+<li><h3 id="DHCP的主要功能"><a href="#DHCP的主要功能" class="headerlink" title="DHCP的主要功能"></a>DHCP的主要功能</h3><p>–为内部网络自动分配IP地址 </p>
+<p>– 中央管理所有计算机的手段</p>
+</li>
+<li><h3 id="DHCP服务优点"><a href="#DHCP服务优点" class="headerlink" title="DHCP服务优点"></a>DHCP服务优点</h3><p>– 集中验证IP地址等参数，不必检查每个主机</p>
+<p>– 不会分配相同IP给不同主机 </p>
+<p>– 约束特定计算机使用特定IP </p>
+<p>– 为DHCP作用域设置各种选项</p>
+<p>– 子网间移动主机不需重设IP</p>
+</li>
+<li><h3 id="DHCP服务缺点"><a href="#DHCP服务缺点" class="headerlink" title="DHCP服务缺点"></a>DHCP服务缺点</h3><p>– 不能发现非DHCP客户机IP </p>
+<p>– 多DHCP服务器难联动分配 </p>
+<p>– DHCP服务器不能跨路由器与客户机通信，除非路由器允许BOOTP转发</p>
+</li>
+<li><h3 id="常用术语"><a href="#常用术语" class="headerlink" title="常用术语"></a>常用术语</h3><p>– DHCP服务器：提供DHCP服务的计算机 </p>
+<p>– DHCP客户端：启用DHCP设置的计算机 </p>
+<p>– 作用域：完整连续的可用IP地址范围 </p>
+<p>– 排除范围：作用域内从DHCP服务中排除的有限IP地址序列 </p>
+<p>– 地址池：定义作用域并应用排除范围后剩余的地址 </p>
+<p>– 租约：客户机可使用动态分配IP地址的时间 </p>
+<ul>
+<li><p>客户机发出租约后：此租约被看作是活动的 </p>
+</li>
+<li><p>租约终止前：客户机可向DHCP服务器请求更新租约 </p>
+</li>
+<li><p>租约到期或被删后：此租约变为不活动的 </p>
+</li>
+</ul>
+</li>
+</ol>
+<p>– 预约：客户机指定永久租约</p>
+<ol>
+<li><h3 id="DCHP的工作流程"><a href="#DCHP的工作流程" class="headerlink" title="DCHP的工作流程"></a>DCHP的工作流程</h3><p>– 发现阶段：客户机寻找服务器 </p>
+<p>– 提供阶段：服务器提供IP地址 </p>
+<p>– 选择阶段：客户机选择某台服务器提供的IP地址 </p>
+<p>– 确认阶段：服务器确认所提供的IP地址 </p>
+<p>– 重新登录</p>
+<ul>
+<li>客户机重新登录网络时，不需再发送DHCPdiscover发现信息</li>
+<li>直接发送包含前一次所分配的IP地址的DHCPrequest请求信息 </li>
+</ul>
+<p>– 更新租约</p>
+<ul>
+<li>出租IP有租借期限，期满后便收回</li>
+<li>如要延长租约，则须更新租约</li>
+</ul>
+</li>
+<li><h3 id="DHCP分配地址的方法"><a href="#DHCP分配地址的方法" class="headerlink" title="DHCP分配地址的方法"></a>DHCP分配地址的方法</h3><p>– 自动分配</p>
+<ul>
+<li>服务器为客户机指定永久IP地址</li>
+<li>第一次成功租到IP地址后就可永久使用 </li>
+</ul>
+<p>– 动态分配</p>
+<ul>
+<li>服务器为客户机指定具时间限制的IP地址</li>
+<li>到期或明确放弃该地址时可被其他客户机使用</li>
+</ul>
+<p>– 手工分配：客户机IP地址由网管指定</p>
+</li>
+</ol>
+<h2 id="二、项目实施"><a href="#二、项目实施" class="headerlink" title="二、项目实施"></a>二、项目实施</h2><ol>
+<li><h3 id="准备-3-台机器"><a href="#准备-3-台机器" class="headerlink" title="准备 3 台机器"></a>准备 3 台机器</h3><p>– 安装好 1 台CentOS虚拟机 </p>
+<p>– 使用链接复制的方式复制3台 </p>
+<ul>
+<li>命名分别为 Srv、CliCent1和CliCent2</li>
+<li>分别用作DHCP服务器、测试用客户端1和测试用客户端2 </li>
+</ul>
+<p><img src="1.png" alt=""></p>
+<p><img src="2.png" alt=""></p>
+<p>– 修改3台虚拟机的主机名</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hostnamectl set-hostname [MYHOSTNAME]</span><br></pre></td></tr></table></figure>
+<p>– 修改 3 台虚拟机的唯一编号</p>
+<ul>
+<li><p>/etc/machine-id</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uuidgen &gt;/etc/machine-id</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>/etc/sysconfig/network-scripts/ifcfg-enp0s3</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i &quot;s/^UUID=[0-9a-z\-]<span class="emphasis">*$/UUID=`uuidgen`/g&quot; /etc/sysconfig/network-scripts/ifcfg-enp0s3</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>uuidgen命令可产生唯一标识UUID</p>
+</li>
+</ul>
+<p><img src="3.png" alt=""></p>
+</li>
+<li><h3 id="安装DHCP"><a href="#安装DHCP" class="headerlink" title="安装DHCP"></a>安装DHCP</h3><p>– yum安装命令 </p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install dhcp</span><br></pre></td></tr></table></figure>
+<p>– 安装完后会生成主配置文件：/etc/dhcp/dhcpd.conf</p>
+<p>– 确保客户机上安装有DHCP客户端程序 dhcp-clien</p>
+</li>
+<li><h3 id="配置DHCP"><a href="#配置DHCP" class="headerlink" title="配置DHCP"></a>配置DHCP</h3><p>– Srv主配置文件</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ddns-update-style none;</span><br><span class="line">option domain-name-servers 192.168.100.1;</span><br><span class="line">subnet 192.168.100.0 netmask 255.255.255.0 &#123;</span><br><span class="line">range 192.168.100.101 192.168.100.200;</span><br><span class="line">option routers 192.168.100.1;</span><br><span class="line">option subnet-mask 255.255.255.0;</span><br><span class="line">&#125;</span><br><span class="line">DHCPDARGS=&quot;enp0s3&quot;;</span><br><span class="line"><span class="section">#服务器IP是192.168.100.1</span></span><br><span class="line"><span class="section">#分本的地址是该网段的 192.168.100.101~192.168.100.200</span></span><br><span class="line"><span class="section">#绑定在 enp0s3网卡上</span></span><br></pre></td></tr></table></figure>
+<p><img src="4.png" alt=""></p>
+<p>– 修改Srv的网络配置文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">BOOTPROTO=static   # 将IP地址设为静态</span><br><span class="line">IPADDR=192.168.100.1</span><br><span class="line">NETMASK=255.255.255.0</span><br></pre></td></tr></table></figure>
+<p><img src="5.png" alt=""></p>
+<p>– 客户机CliCent1和CliCent2 维持原状</p>
+<p>– 改虚拟机的网络为内部网络并刷新网卡物理地址</p>
+<p><img src="6.png" alt=""></p>
+</li>
+<li><p>启动服务器</p>
+<p>– 在Srv上启动DHCP服务器</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start dhcp</span><br></pre></td></tr></table></figure>
+<p><img src="7.png" alt=""></p>
+<p>– 重启客户机CliCent1和CliCent2</p>
+<ul>
+<li>查看其IP地址</li>
+<li>相互Ping检查是否相通</li>
+</ul>
+<p><img src="8.png" alt=""></p>
+<p><img src="9.png" alt=""></p>
+</li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Ave Bai</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://10185102110.github.io/2021/05/14/DHCP%E7%9A%84%E9%85%8D%E7%BD%AE%E4%B8%8E%E7%AE%A1%E7%90%86/">http://10185102110.github.io/2021/05/14/DHCP%E7%9A%84%E9%85%8D%E7%BD%AE%E4%B8%8E%E7%AE%A1%E7%90%86/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://10185102110.github.io" target="_blank">浮生孰来</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Server%E3%80%81DHCP/">Server、DHCP</a></div><div class="post_share"><div class="social-share" data-image="/img/3.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/05/14/DNS%E7%9A%84%E9%85%8D%E7%BD%AE%E4%B8%8E%E7%AE%A1%E7%90%86/"><img class="prev-cover" src="/img/1.jpg" onerror="onerror=null;src='/img/12.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">DNS的配置与管理</div></div></a></div><div class="next-post pull-right"><a href="/2021/05/12/%E5%9F%BA%E4%BA%8ECF%E5%8D%95%E7%9B%AE%E6%A0%87%E8%BF%BD%E8%B8%AA/"><img class="next-cover" src="/2021/05/12/%E5%9F%BA%E4%BA%8ECF%E5%8D%95%E7%9B%AE%E6%A0%87%E8%BF%BD%E8%B8%AA/Carscale.jpg" onerror="onerror=null;src='/img/12.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">基于CF的单目标追踪</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#DHCP%E7%9A%84%E9%85%8D%E7%BD%AE%E4%B8%8E%E7%AE%A1%E7%90%86"><span class="toc-number">1.</span> <span class="toc-text">DHCP的配置与管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="toc-number">1.1.</span> <span class="toc-text">一、基础知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFDHCP"><span class="toc-number">1.1.1.</span> <span class="toc-text">什么是DHCP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DHCP%E7%9A%84%E4%B8%BB%E8%A6%81%E5%8A%9F%E8%83%BD"><span class="toc-number">1.1.2.</span> <span class="toc-text">DHCP的主要功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DHCP%E6%9C%8D%E5%8A%A1%E4%BC%98%E7%82%B9"><span class="toc-number">1.1.3.</span> <span class="toc-text">DHCP服务优点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DHCP%E6%9C%8D%E5%8A%A1%E7%BC%BA%E7%82%B9"><span class="toc-number">1.1.4.</span> <span class="toc-text">DHCP服务缺点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E6%9C%AF%E8%AF%AD"><span class="toc-number">1.1.5.</span> <span class="toc-text">常用术语</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DCHP%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="toc-number">1.1.6.</span> <span class="toc-text">DCHP的工作流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DHCP%E5%88%86%E9%85%8D%E5%9C%B0%E5%9D%80%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-number">1.1.7.</span> <span class="toc-text">DHCP分配地址的方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%96%BD"><span class="toc-number">1.2.</span> <span class="toc-text">二、项目实施</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%86%E5%A4%87-3-%E5%8F%B0%E6%9C%BA%E5%99%A8"><span class="toc-number">1.2.1.</span> <span class="toc-text">准备 3 台机器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85DHCP"><span class="toc-number">1.2.2.</span> <span class="toc-text">安装DHCP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEDHCP"><span class="toc-number">1.2.3.</span> <span class="toc-text">配置DHCP</span></a></li></ol></li></ol></li></ol></div></div></div></div></main><footer id="footer" style="background-image: url('/img/3.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By Ave Bai</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    loader: {
+      source: {
+        '[tex]/amsCd': '[tex]/amscd'
+      }
+    },
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        addClass: [200,() => {
+          document.querySelectorAll('mjx-container:not([display=\'true\']').forEach( node => {
+            const target = node.parentNode
+            if (!target.classList.contains('has-jax')) {
+              target.classList.add('mathjax-overflow')
+            }
+          })
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><script>if (document.getElementsByClassName('mermaid').length) {
+  if (window.mermaidJsLoad) mermaid.init()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(() => {
+      window.mermaidJsLoad = true
+      mermaid.initialize({
+        theme: 'default',
+      })
+      false && mermaid.init()
+    })
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
