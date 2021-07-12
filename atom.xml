@@ -6,7 +6,7 @@
   <link href="http://10185102110.github.io/atom.xml" rel="self"/>
   
   <link href="http://10185102110.github.io/"/>
-  <updated>2021-06-13T09:07:37.229Z</updated>
+  <updated>2021-07-12T08:59:19.002Z</updated>
   <id>http://10185102110.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>基于GaussDB的招聘与就业信息管理系统</title>
+    <link href="http://10185102110.github.io/2021/07/12/%E5%9F%BA%E4%BA%8EGaussDB%E7%9A%84%E6%8B%9B%E8%81%98%E4%B8%8E%E5%B0%B1%E4%B8%9A%E4%BF%A1%E6%81%AF%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/"/>
+    <id>http://10185102110.github.io/2021/07/12/%E5%9F%BA%E4%BA%8EGaussDB%E7%9A%84%E6%8B%9B%E8%81%98%E4%B8%8E%E5%B0%B1%E4%B8%9A%E4%BF%A1%E6%81%AF%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/</id>
+    <published>2021-07-12T08:24:40.000Z</published>
+    <updated>2021-07-12T08:59:19.002Z</updated>
+    
+    <content type="html"><![CDATA[<p>基于云数据库 GaussDB(for MySQL)实现，使用华为云账号进行操作。</p><h2 id="系统描述"><a href="#系统描述" class="headerlink" title="系统描述"></a>系统描述</h2><p>大学毕业生要就业，企业要吸收新鲜血液，学校作为两者之间的桥梁，需要进行信息的集成和管理，便于对毕业生就业与企业招聘信息进行管理和调研。 </p><p>本系统主要面对三种用户，学校管理机构、毕业生、企业。 </p><ul><li><p>管理机构人员可以对本校毕业生、面向本校的招聘会和参会企业的基本信息进行查询和修改，同时对毕业生参会、面试、聘用情况进行查询， 最后获得企业用人倾向和毕业生择业倾向的统计分析结果。 </p></li><li><p>毕业生可以对个人信息修改，对企业和招聘会的信息进行查询。 </p></li><li><p>企业可以对本企业信息和招聘会投递岗位信息进行修改和查询。 </p></li></ul><p>本系统集成了学校、毕业生、企业三方信息，便于学生了解和参与本校与企业合作提供的招聘会，同时方便学校做信息调研。</p><h2 id="应用程序功能"><a href="#应用程序功能" class="headerlink" title="应用程序功能"></a>应用程序功能</h2><p>(1) 对所有用户开放：</p><p> 招聘会基本信息的查询 </p><p>招聘会参会企业的查询</p><p> (2) 对学生开放： </p><p>自己基本信息的编辑 </p><p>自己学业信息的编辑 </p><p>报名招聘会 </p><p>(3) 对企业开放： </p><p>本企业信息的编辑 </p><p>毕业生的面试和聘用情况的录入</p><p> (4) 对学校开放： </p><p>招聘与就业信息的查询、统计和分析</p><h2 id="系统-rm-E-R-图"><a href="#系统-rm-E-R-图" class="headerlink" title="系统 $\rm{E-R}$ 图"></a>系统 $\rm{E-R}$ 图</h2><p><img src="D:\blog\source\_posts\基于GaussDB的招聘与就业信息管理系统\1.png" alt="1"></p><h2 id="关系模式设计"><a href="#关系模式设计" class="headerlink" title="关系模式设计"></a>关系模式设计</h2><p>根据概念结构设计得到的 E-R 图和转换规则，得到如下关系模式（主键用下 划线标出，外键予以说明）：</p><ul><li>基本信息：学号、姓名、籍贯、出生日期、性别、身份证号、政治面貌、 民族、婚姻状况、户口所在地、联系电话、电子邮箱。 </li><li>学业信息：学号、学院、专业、最高学历、均绩、英语水平、计算机水平、普通话水平、实习经历、竞赛经历、项目经历。学号外键参考基本信息。 </li><li>招聘会：编号、名称、日期、地址。 </li><li>企业：编号、名称、类型、社会信用代码、城市、邮政代码、联系地址。 </li><li>参会：学号、招聘会编号。学号外键参考基本信息，招聘会编号外键参考招聘会。 </li><li>招聘信息包括：招聘会编号、企业编号、岗位、人数、薪资。 招聘会编号外键参考招聘会，企业编号外键参考企业。 </li><li>面试： 学号、企业编号、岗位、聘用、薪资。学号外键参考基本信息， 企业编号外键参考企业。 </li><li>账户：账号、密码、权限。</li></ul><h2 id="演示视频"><a href="#演示视频" class="headerlink" title="演示视频"></a>演示视频</h2><video src="http://qw4inwd8e.hd-bkt.clouddn.com/video/%E7%89%9F%E8%83%9C%E6%9D%B0_%E7%99%BD%E5%A3%AB%E5%86%9B_%E9%99%88%E5%89%91%E9%9D%92%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BD%9C%E4%B8%9A%E5%B1%95%E7%A4%BA.mp4" controls="controls" style="max-width: 100%; display: block; margin-left: auto; margin-right: auto;"> your browser does not support the video tag </video><p>代码地址：</p><p><a href="https://github.com/10185102110/Recruitment-and-employment-information-management-system">10185102110/Recruitment-and-employment-information-management-system (github.com)</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;基于云数据库 GaussDB(for MySQL)实现，使用华为云账号进行操作。&lt;/p&gt;
+&lt;h2 id=&quot;系统描述&quot;&gt;&lt;a href=&quot;#系统描述&quot; class=&quot;headerlink&quot; title=&quot;系统描述&quot;&gt;&lt;/a&gt;系统描述&lt;/h2&gt;&lt;p&gt;大学毕业生要就业，企业要吸收</summary>
+      
+    
+    
+    
+    <category term="MySQL" scheme="http://10185102110.github.io/categories/MySQL/"/>
+    
+    
+    <category term="MySQL" scheme="http://10185102110.github.io/tags/MySQL/"/>
+    
+  </entry>
   
   <entry>
     <title>基于openpose的手势识别</title>
