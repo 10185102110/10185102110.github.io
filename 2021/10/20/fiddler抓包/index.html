@@ -1,0 +1,497 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Fiddler抓包 | 浮生孰来</title><meta name="keywords" content="软件测试"><meta name="author" content="Ave Bai"><meta name="copyright" content="Ave Bai"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="[TOC] 基本界面 左半边是 Web Sessions 列表（会话列表），显示捕捉到的每个 Session 的简短信息。 下面的一行黑框是 QuickExec（命令行工具），可以输入简单的命令，例如输入 cls 可以清空 Web Sessions。 右半边是 Inspectors 选项卡（功能面板），上面是 HTTP 请求报文，下面是 HTTP 响应报文。其中 Raw 选项卡可以查看完整的消息，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Fiddler抓包">
+<meta property="og:url" content="http://10185102110.github.io/2021/10/20/fiddler%E6%8A%93%E5%8C%85/index.html">
+<meta property="og:site_name" content="浮生孰来">
+<meta property="og:description" content="[TOC] 基本界面 左半边是 Web Sessions 列表（会话列表），显示捕捉到的每个 Session 的简短信息。 下面的一行黑框是 QuickExec（命令行工具），可以输入简单的命令，例如输入 cls 可以清空 Web Sessions。 右半边是 Inspectors 选项卡（功能面板），上面是 HTTP 请求报文，下面是 HTTP 响应报文。其中 Raw 选项卡可以查看完整的消息，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://10185102110.github.io/img/default/13.jpg">
+<meta property="article:published_time" content="2021-10-20T12:06:36.000Z">
+<meta property="article:modified_time" content="2021-10-29T07:25:53.579Z">
+<meta property="article:author" content="Ave Bai">
+<meta property="article:tag" content="软件测试">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://10185102110.github.io/img/default/13.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://10185102110.github.io/2021/10/20/fiddler%E6%8A%93%E5%8C%85/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="baidu_site_verification"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?211d055ab9f6b88805047adca6ce783d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Fiddler抓包',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-10-29 15:25:53'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><link rel="stylesheet" href="/css/bilibili.css"><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="浮生孰来" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">30</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/picture/"><i class="fa-fw fas fa-camera"></i><span> 图库</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/default/13.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">浮生孰来</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/picture/"><i class="fa-fw fas fa-camera"></i><span> 图库</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Fiddler抓包</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-10-20T12:06:36.000Z" title="发表于 2021-10-20 20:06:36">2021-10-20</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-10-29T07:25:53.579Z" title="更新于 2021-10-29 15:25:53">2021-10-29</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/">软件测试</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">3.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>11分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Fiddler抓包"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>[TOC]</p>
+<h1 id="基本界面"><a href="#基本界面" class="headerlink" title="基本界面"></a>基本界面</h1><p><img src="D:\blog\source\_posts\fiddler抓包\0.png" alt="0"></p>
+<p>左半边是 Web Sessions 列表（会话列表），显示捕捉到的每个 Session 的简短信息。</p>
+<p>下面的一行黑框是 QuickExec（命令行工具），可以输入简单的命令，例如输入 cls 可以清空 Web Sessions。</p>
+<p>右半边是 Inspectors 选项卡（功能面板），上面是 HTTP 请求报文，下面是 HTTP 响应报文。其中 Raw 选项卡可以查看完整的消息，Headers 选项卡只查看消息中的 Header。</p>
+<p>Web Sessions 列表栏中包含的信息如下：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Result</th>
+<th>Protocol</th>
+<th>Host</th>
+<th>URL</th>
+<th>Body</th>
+<th>Caching</th>
+<th>Content-Type</th>
+<th>Process</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Fiddler 生成的 ID</td>
+<td>响应的状态码</td>
+<td>使用的协议：HTTP/HTTPS</td>
+<td>服务器的主机名和端口号</td>
+<td>路径</td>
+<td>响应中包含的字节数</td>
+<td>跟缓存相关的字段的值</td>
+<td>响应中 Content-Type 的值</td>
+<td>对应本地 zhuabao</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>Fiddler 是以代理 Web 服务器的形式工作的，它使用代理地址：127.0.0.1，端口：8888。</p>
+<p>Fiddler 启动的时候，会偷偷地把 Internet 选项中的代理修改为 127.0.0.1，端口：8888。当 Fiddler 退出的时候，它会自动在 Internet 选项中取消代理，这样就不会影响别的程序。如果 Fiddler 非正常退出，这时候因为 Fiddler 没有自动注销，会造成网页无法访问，解决办法是重新启动 Fiddler。</p>
+<h1 id="捕获-HTTP-HTTPS-协议的数据包"><a href="#捕获-HTTP-HTTPS-协议的数据包" class="headerlink" title="捕获 HTTP/HTTPS 协议的数据包"></a>捕获 HTTP/HTTPS 协议的数据包</h1><p>（1）启动 Fiddler，打开任何一个浏览器，输入 <a target="_blank" rel="noopener" href="https://avebai.gitee.io/">https://avebai.gitee.io/</a>。</p>
+<p>（2）回到 Fiddler 界面，在 Session 列表中，会看到 Fiddler 已经捕获到了很多 Session。可以选择任何一个 Session，然后选择 Inspectors 选项卡，就可以查看详细内容。</p>
+<p>单击 Fiddler 左下角的 “Capturing” 按钮可以设置开始抓包或者停止抓包。</p>
+<h2 id="HTTP-协议报文结构"><a href="#HTTP-协议报文结构" class="headerlink" title="HTTP 协议报文结构"></a>HTTP 协议报文结构</h2><p>HTTP 报文分 2 个：一个是 HTTP 请求报文，一个是 HTTP 响应报文。</p>
+<p>（1）HTTP 请求报文的结构</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">//起始行（Request line）</span><br><span class="line"><span class="keyword">GET</span> <span class="string">https://avebai.gitee.io/</span> <span class="meta">HTTP/1.1</span></span><br><span class="line">//首部（Request Header）</span><br><span class="line"><span class="attribute">Host</span><span class="punctuation">: </span>avebai.gitee.io    </span><br><span class="line"><span class="attribute">Connection</span><span class="punctuation">: </span>keep-alive</span><br><span class="line"><span class="attribute">Cache-Control</span><span class="punctuation">: </span>max-age=0</span><br><span class="line"><span class="attribute">sec-ch-ua</span><span class="punctuation">: </span>&quot;Microsoft Edge&quot;;v=&quot;95&quot;, &quot;Chromium&quot;;v=&quot;95&quot;, &quot;;Not A Brand&quot;;v=&quot;99&quot;</span><br><span class="line"><span class="attribute">sec-ch-ua-mobile</span><span class="punctuation">: </span>?0</span><br><span class="line"><span class="attribute">sec-ch-ua-platform</span><span class="punctuation">: </span>&quot;Windows&quot;</span><br><span class="line"><span class="attribute">Upgrade-Insecure-Requests</span><span class="punctuation">: </span>1</span><br><span class="line"><span class="attribute">User-Agent</span><span class="punctuation">: </span>Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36 Edg/95.0.1020.30  </span><br><span class="line"><span class="attribute">Accept</span><span class="punctuation">: </span>text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9     </span><br><span class="line"><span class="attribute">Sec-Fetch-Site</span><span class="punctuation">: </span>none</span><br><span class="line"><span class="attribute">Sec-Fetch-Mode</span><span class="punctuation">: </span>navigate</span><br><span class="line"><span class="attribute">Sec-Fetch-User</span><span class="punctuation">: </span>?1</span><br><span class="line"><span class="attribute">Sec-Fetch-Dest</span><span class="punctuation">: </span>document</span><br><span class="line"><span class="attribute">Accept-Encoding</span><span class="punctuation">: </span>gzip, deflate, br  </span><br><span class="line"><span class="attribute">Accept-Language</span><span class="punctuation">: </span>zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6  </span><br><span class="line"><span class="attribute">Cookie</span><span class="punctuation">: </span>Hm_lvt_211d055ab9f6b88805047adca6ce783d=1633064099,1634716265,1634914872,1635040194; Hm_lpvt_211d055ab9f6b88805047adca6ce783d=1635040543</span><br><span class="line"><span class="attribute">If-None-Match</span><span class="punctuation">: </span>W/&quot;6172d18e-a294&quot;</span><br><span class="line"><span class="attribute">If-Modified-Since</span><span class="punctuation">: </span>Fri, 22 Oct 2021 14:58:22 GMT</span><br><span class="line">回车符+换行符</span><br><span class="line">//主体（Body）</span><br></pre></td></tr></table></figure>
+<p>HTTP 请求报文分为 3 部分。其中首部第一行表示请求方法（POST/GET）+URI（不是URL）+协议版本，如果是 GET 就没有主体。</p>
+<p>（2）HTTP 响应报文的结构</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//起始行（Response line）</span><br><span class="line"><span class="meta">HTTP/1.1</span> <span class="number">304</span> Not Modified</span><br><span class="line">//首部（Response Header）</span><br><span class="line"><span class="attribute">Date</span><span class="punctuation">: </span>Sun, 24 Oct 2021 02:07:42 GMT</span><br><span class="line"><span class="attribute">Connection</span><span class="punctuation">: </span>keep-alive</span><br><span class="line"><span class="attribute">Server</span><span class="punctuation">: </span>openresty</span><br><span class="line"><span class="attribute">Last-Modified</span><span class="punctuation">: </span>Fri, 22 Oct 2021 14:58:22 GMT</span><br><span class="line"><span class="attribute">ETag</span><span class="punctuation">: </span>&quot;6172d18e-a294&quot;</span><br><span class="line"><span class="attribute">Expires</span><span class="punctuation">: </span>Mon, 25 Oct 2021 02:07:42 GMT</span><br><span class="line"><span class="attribute">Cache-Control</span><span class="punctuation">: </span>max-age=86400</span><br><span class="line">回车符+换行符</span><br><span class="line">//主体（Body）</span><br></pre></td></tr></table></figure>
+<p>Response 消息的结构和 Request 消息的结构基本一样。</p>
+<p>起始行包括协议版本+状态码+状态码信息。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1XX</td>
+<td>信息提示，表示请求已被成功接收，继续处理</td>
+</tr>
+<tr>
+<td>2XX</td>
+<td>成功，表示请求已被成功接收</td>
+</tr>
+<tr>
+<td>3XX</td>
+<td>重定向，必须进一步处理</td>
+</tr>
+<tr>
+<td>4XX</td>
+<td>客户端错误，请求有语法错误或请求无法实现</td>
+</tr>
+<tr>
+<td>5XX</td>
+<td>服务器错误，服务器未能实现合法的请求</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>常见的状态码：</p>
+<ul>
+<li>200：OK，服务器成功处理了请求。</li>
+<li>204：No Content，没有内容。</li>
+<li>206：Partial Content，部分内容。</li>
+<li>301/302：Moved Permanently，请求的 URL 已移走。</li>
+<li>304：Not Modified，上次的文档已被缓存且是最新的，可以继续使用。</li>
+<li>400：Bad Request，客户端请求有语法错误。</li>
+<li>403：Forbidden，拒绝访问。</li>
+<li>404：Not Found，未找到资源。</li>
+<li>401：Unauthorized，未授权错误禁止访问。</li>
+<li>501：Internal Server Error，服务器内部错误。</li>
+<li>503：Server Unavailable，服务器暂时不可用。</li>
+</ul>
+<p>（3）URL</p>
+<p>URL 的全称是Uniform Resource Locator，中文译名为“统一资源定位符”，用于完整地描述 Internet 上某一处资源的地址。<br>URI 的全称是 Uniform Resource Identifier，中文译名为“统一资源标识符”，用来唯一地标识一个资源。而 URL 是一种具体的 URI。</p>
+<p>URL 的基本格式：协议+域名+资源路径+参数+锚</p>
+<p>协议一般为 http、https、ftp 等；锚以 ‘#’ 开头。</p>
+<p>参数可以通过 fiddler 中的 WebForms 查看。</p>
+<p>锚是页面内部的超链接，可以快速到达本页内响应的位置。</p>
+<p>（4）HTTP 请求方法</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GET</td>
+<td>请求指定的页面信息并返回实体主体。</td>
+</tr>
+<tr>
+<td>HEAD</td>
+<td>类似 GET，但返回的响应中没有具体内容，用于获取报文头部。</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>向指定资源提交数据进行处理，数据被包含在请求体中。可能导致新资源的建立或对已有资源的修改。</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td>向服务器传送数据。</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>请求服务器删除指定页面。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>GET 和 POST 的区别：</p>
+<ul>
+<li>GET 提交的数据会放在 URL 之后，以 ‘？’ 分割 URL 和传输的数据，参数之间以 ‘&amp;’ 相连。POST 方法是把提交的数据放在 HTTP 包的 Body 中。</li>
+<li>GET 提交的数据大小有限制（因为浏览器对 URL 的长度有限制），而 POST 方法提交的数据大小没有限制。</li>
+<li>GET 方式提交数据会带来安全问题，比如一个登录页面通过 GET 方式提交数据时，用户名和密码将出现在 URL 上。</li>
+</ul>
+<p>（5）Header</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Header 字段</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cookie</td>
+<td></td>
+</tr>
+<tr>
+<td>Accept</td>
+<td>表示浏览器可以接受的媒体类型。</td>
+</tr>
+<tr>
+<td>Accept-Encoding</td>
+<td>表示浏览器支持的压缩方式。</td>
+</tr>
+<tr>
+<td>Accept-Language</td>
+<td>表示浏览器支持的语言。</td>
+</tr>
+<tr>
+<td>User-Agent</td>
+<td>告诉服务器，浏览器客户端的相关信息，可以修改它伪装成任何客户端</td>
+</tr>
+<tr>
+<td>Referer</td>
+<td>用来让服务器判断用户的来源页面</td>
+</tr>
+<tr>
+<td>Connection</td>
+<td>表示 TCP 连接信息</td>
+</tr>
+<tr>
+<td>Host</td>
+<td>指定被请求的主机和端口号</td>
+</tr>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="设置断点拦截-HTTP-请求"><a href="#设置断点拦截-HTTP-请求" class="headerlink" title="设置断点拦截 HTTP 请求"></a>设置断点拦截 HTTP 请求</h2><p>一、全局断点</p>
+<p>（1）启动 Fiddler，在菜单栏中单击 Rules -&gt; Automatic Breakpoint -&gt; Before Requests。</p>
+<p>（2）打开浏览器，输入“www.baidu.com”，这时任务栏上的 Fiddler 图标闪烁，说明 Fiddler 拦截住了 HTTP 请求。</p>
+<p>（3）在菜单栏中单击 Rules-&gt; Automatic Breakpoint-&gt;Disable（因为已经拦截住想要的 HTTP 请求了，其他 HTTP 请求就不需要拦截了）。</p>
+<p>（4）选中需要修改的 HTTP 请求，选中 “Inspectors” 面板，可以使用 Raw 选项卡修改请求文件。</p>
+<p>（5）单击绿色的 “Run to Completion” 按钮放行。</p>
+<p>二、单个断点</p>
+<p>命令行输入：bpm www.baidu.cm（拦截 www.baidu.com 请求）</p>
+<p>输入命令：bpu （解除拦截）</p>
+<h2 id="设置断点修改-HTTP-响应"><a href="#设置断点修改-HTTP-响应" class="headerlink" title="设置断点修改 HTTP 响应"></a>设置断点修改 HTTP 响应</h2><p>一、全局断点</p>
+<p>（1）启动 Fiddler，在菜单栏中单击 Rules -&gt; Automatic Breakpoint -&gt; After Response。</p>
+<p>（2）打开浏览器，输入“www.baidu.com”，这时任务栏上的 Fiddler 图标闪烁，说明 Fiddler 拦截住了 HTTP 请求。</p>
+<p>（3）在菜单栏中单击 Rules-&gt; Automatic Breakpoint-&gt;Disable（因为已经拦截住想要的 HTTP 请求了，其他 HTTP 请求就不需要拦截了）。</p>
+<p>（4）选中需要修改的 HTTP 请求，选中 “Inspectors” 面板，可以使用 Raw 选项卡修改响应文件。</p>
+<p>（5）单击绿色的 “Run to Completion” 按钮放行。</p>
+<p>二、单个断点</p>
+<p>命令行输入：bpafter www.baidu.com（拦截 www.baidu.com 响应）</p>
+<p>输入命令：bpafter （解除拦截）</p>
+<h1 id="手机抓包"><a href="#手机抓包" class="headerlink" title="手机抓包"></a>手机抓包</h1><p>（1）启动 Fiddler，单击菜单栏中 Tools-&gt;Options-&gt;Connections，选中“Allow remote computers to connect”，Fiddler 的默认端口号是 8888。</p>
+<p>（2）以小米 10 为例，打开手机中的设置-&gt;WLAN，找到手机当前连接的 WiFi，修改代理服务器，服务器主机名为 Fiddler 所在电脑的 IP 地址，服务器端口为 8888，如下图所示：</p>
+<p><img src="D:\blog\source\_posts\fiddler抓包\2.jpg" alt="2"></p>
+<p>在 Fiddler 中，将鼠标放在右上方的“online”图标上能看到主机 IP 地址。</p>
+<p>（3）现在在手机上打开网址或者应用就能在 Fiddler 中捕获手机发出的 HTTP 包，可以设置过滤条件，如下：</p>
+<p><img src="D:\blog\source\_posts\fiddler抓包\3.png" alt="3"></p>
+<p>（4）要捕获 HTTPS 包就要在手机上安装证书。打开手机浏览器，输入 <a target="_blank" rel="noopener" href="http://192.168.1.101:8888">http://192.168.1.101:8888</a> ，点击图中蓝色字段下载证书，点击证书文件进行安装即可。</p>
+<p><img src="D:\blog\source\_posts\fiddler抓包\1.jpg" alt="1"></p>
+<p>（5）点击设置-&gt;系统安全-&gt;信任的凭证-&gt;用户 可以看到安装的证书，点击删除即可卸载。</p>
+<p><img src="D:\blog\source\_posts\fiddler抓包\4.jpg" alt="4"></p>
+<h1 id="Fiddler-发送-HTTP-HTTPS-请求"><a href="#Fiddler-发送-HTTP-HTTPS-请求" class="headerlink" title="Fiddler 发送 HTTP/HTTPS 请求"></a>Fiddler 发送 HTTP/HTTPS 请求</h1><p>功能组件 Composer 可以用来发送 HTTP/HTTPS 请求。</p>
+<p><img src="D:\blog\source\_posts\fiddler抓包\5.png" alt="5"></p>
+<p>Composer 有两种编辑模式：</p>
+<ul>
+<li>Parsed模式。这个模式比较常用，把请求分为 3 个部分：请求起始行、请求 Header 和请求 Body。</li>
+<li>Raw模式。该模式需要一行一行地写一个请求。</li>
+</ul>
+<p>也可以把会话列表中的 HTTP/HTTPS 请求拖拽到 Composer 中编辑后再发送出去。</p>
+<h2 id="Replay-菜单"><a href="#Replay-菜单" class="headerlink" title="Replay 菜单"></a>Replay 菜单</h2><p>在会话列表中，选中一个或者多个 Session，右键-&gt;Replay，可以看到一个菜单，详细说明如下：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Reissue Requests</th>
+<th>重复发送请求</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Reissue Unconditionally</td>
+<td>无条件反复发送选中的请求</td>
+</tr>
+<tr>
+<td>Reissue and Edit</td>
+<td>把选中的请求以原来的形式重新发送。在每个Session中设置断点，可以在发送给服务器之前修改请求</td>
+</tr>
+<tr>
+<td>Reissue and Verify</td>
+<td>重新发送请求，检查响应，如果和上一个请求一样就变成绿色</td>
+</tr>
+<tr>
+<td>Reissue Sequentially</td>
+<td>选中多个Session会按顺序重新发送请求，单线程</td>
+</tr>
+<tr>
+<td>Reissue from Composer</td>
+<td>在Composer中编辑该请求</td>
+</tr>
+<tr>
+<td>Revisit in IE</td>
+<td>在IE浏览器中用Get方法访问该请求</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="简单的性能测试"><a href="#简单的性能测试" class="headerlink" title="简单的性能测试"></a>简单的性能测试</h2><p>在 Web Sessions 列表中，选中一个或者多个 Session，然后按下 Shift 键的同时单击“Replay”按钮，会弹出提示框，要求指定每个请求被重新发送的次数。Fiddler 会用多线程同时发送该请求，相当于模拟了很多用户同时访问该请求。</p>
+<p><img src="D:\blog\source\_posts\fiddler抓包\6.png" alt="6"></p>
+<h2 id="安全测试之重放攻击"><a href="#安全测试之重放攻击" class="headerlink" title="安全测试之重放攻击"></a>安全测试之重放攻击</h2><p>重放攻击（Replay Attacks），指黑客通过抓包的方式，得到客户端的请求数据及请求连接，重复地向服务器发送请求的行为。</p>
+<p>重放攻击的危害很大，比如下单、投票、点赞等功能，攻击者可以对用户的请求进行抓包，然后重复发送来进行刷单、刷票等操作。</p>
+<p><strong>如何防止重放攻击？</strong></p>
+<p>在 HTTP/HTTPS 请求中添加时间戳（stamp）和数字签名（sign），可以防止重放攻击。也就是说每次发送请求时需要多传两个参数，分别为 stamp 和 sign。数字签名使用对称加密，保证请求的有效性；时间戳保证请求的时效性。</p>
+<h1 id="Fiddler-实现弱网测试"><a href="#Fiddler-实现弱网测试" class="headerlink" title="Fiddler 实现弱网测试"></a>Fiddler 实现弱网测试</h1><p>Fiddler 是通过延迟发送或接收数据的时间来模拟限速的。</p>
+<p>需要模拟出以下 3 种弱网场景：<br>（1）网络慢或延迟，导致加载时间长。<br>（2）网络中断，Web 服务器返回 500 等状态码。<br>（3）网络超时，HTTP/HTTPS 请求发出去后，很久都没有响应。</p>
+<h2 id="精确控制网速"><a href="#精确控制网速" class="headerlink" title="精确控制网速"></a>精确控制网速</h2><p>（1）启动 Fiddler，选择 Rules -&gt; Performances -&gt; Simulate Modem Speeds，此时打开一个网页可以感觉到明显变慢。</p>
+<p>（2）点击菜单 Rules-&gt;Customize Rules，在 FiddlerScript 中找到如下一段代码（ctrl+F 快速查找）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">if (m_SimulateModem) &#123;</span><br><span class="line">	// Delay sends by 300ms per KB uploaded.每上传1kb数据，延时0.3秒</span><br><span class="line">	oSession[&quot;request-trickle-delay&quot;] = &quot;300&quot;; </span><br><span class="line">    // Delay receives by 150ms per KB downloaded.每下载1kb数据，延时0.15秒</span><br><span class="line">    oSession[&quot;response-trickle-delay&quot;] = &quot;150&quot;; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以修改数值以精确控制网速。</p>
+<p>网络取值的算法就是 1000/下载速度 = 需要延迟的时间（ms），比如 50kbit/s 需要延迟 200ms 来接收数据。</p>
+<h2 id="模拟网络中断"><a href="#模拟网络中断" class="headerlink" title="模拟网络中断"></a>模拟网络中断</h2><p>用 Fiddler 可以下断点，伪造 HTTP 响应。客户端发出的 HTTP 请求根本没有到达服务器，而是被 Fiddler 直接返回了一个伪造的 HTTP 响应。</p>
+<p>具体做法是用 Fiddler 拦截住客户端发出来的 HTTP 请求，然后在“Choose Response”选中需要返回的状态码，然后单击“Run to Completion”返回给客户端，如下图：</p>
+<p><img src="D:\blog\source\_posts\fiddler抓包\7.png" alt="7"></p>
+<p>返回的页面信息被改为 502。</p>
+<h2 id="Fiddler-模拟网络超时"><a href="#Fiddler-模拟网络超时" class="headerlink" title="Fiddler 模拟网络超时"></a>Fiddler 模拟网络超时</h2><p>利用 Fiddler 下断点的功能拦截住移动客户端发出的 HTTP 请求，这样就相当于网络超时了，然后再检查客户端有没有重发或者超时的机制。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Ave Bai</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://10185102110.github.io/2021/10/20/fiddler%E6%8A%93%E5%8C%85/">http://10185102110.github.io/2021/10/20/fiddler%E6%8A%93%E5%8C%85/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://10185102110.github.io" target="_blank">浮生孰来</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/">软件测试</a></div><div class="post_share"><div class="social-share" data-image="/img/default/13.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/10/26/JMeter%20%E5%AE%9E%E8%B7%B5/"><img class="prev-cover" src="/img/default/8.jpg" onerror="onerror=null;src='/img/default.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">JMeter实践</div></div></a></div><div class="next-post pull-right"><a href="/2021/10/20/Android%20%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E5%B9%BF%E6%92%AD%E6%9C%BA%E5%88%B6/"><img class="next-cover" src="/img/default/8.jpg" onerror="onerror=null;src='/img/default.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Android 开发——广播机制</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2021/10/26/JMeter 实践/" title="JMeter实践"><img class="cover" src="/img/default/8.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-10-26</div><div class="title">JMeter实践</div></div></a></div><div><a href="/2021/09/23/高质量代码/" title="高质量代码"><img class="cover" src="/img/default/3.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-09-23</div><div class="title">高质量代码</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E7%95%8C%E9%9D%A2"><span class="toc-number">1.</span> <span class="toc-text">基本界面</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8E%9F%E7%90%86"><span class="toc-number">2.</span> <span class="toc-text">原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8D%95%E8%8E%B7-HTTP-HTTPS-%E5%8D%8F%E8%AE%AE%E7%9A%84%E6%95%B0%E6%8D%AE%E5%8C%85"><span class="toc-number">3.</span> <span class="toc-text">捕获 HTTP&#x2F;HTTPS 协议的数据包</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP-%E5%8D%8F%E8%AE%AE%E6%8A%A5%E6%96%87%E7%BB%93%E6%9E%84"><span class="toc-number">3.1.</span> <span class="toc-text">HTTP 协议报文结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E6%96%AD%E7%82%B9%E6%8B%A6%E6%88%AA-HTTP-%E8%AF%B7%E6%B1%82"><span class="toc-number">3.2.</span> <span class="toc-text">设置断点拦截 HTTP 请求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E6%96%AD%E7%82%B9%E4%BF%AE%E6%94%B9-HTTP-%E5%93%8D%E5%BA%94"><span class="toc-number">3.3.</span> <span class="toc-text">设置断点修改 HTTP 响应</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%89%8B%E6%9C%BA%E6%8A%93%E5%8C%85"><span class="toc-number">4.</span> <span class="toc-text">手机抓包</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Fiddler-%E5%8F%91%E9%80%81-HTTP-HTTPS-%E8%AF%B7%E6%B1%82"><span class="toc-number">5.</span> <span class="toc-text">Fiddler 发送 HTTP&#x2F;HTTPS 请求</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Replay-%E8%8F%9C%E5%8D%95"><span class="toc-number">5.1.</span> <span class="toc-text">Replay 菜单</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E7%9A%84%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="toc-number">5.2.</span> <span class="toc-text">简单的性能测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E4%B9%8B%E9%87%8D%E6%94%BE%E6%94%BB%E5%87%BB"><span class="toc-number">5.3.</span> <span class="toc-text">安全测试之重放攻击</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Fiddler-%E5%AE%9E%E7%8E%B0%E5%BC%B1%E7%BD%91%E6%B5%8B%E8%AF%95"><span class="toc-number">6.</span> <span class="toc-text">Fiddler 实现弱网测试</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B2%BE%E7%A1%AE%E6%8E%A7%E5%88%B6%E7%BD%91%E9%80%9F"><span class="toc-number">6.1.</span> <span class="toc-text">精确控制网速</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E6%8B%9F%E7%BD%91%E7%BB%9C%E4%B8%AD%E6%96%AD"><span class="toc-number">6.2.</span> <span class="toc-text">模拟网络中断</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Fiddler-%E6%A8%A1%E6%8B%9F%E7%BD%91%E7%BB%9C%E8%B6%85%E6%97%B6"><span class="toc-number">6.3.</span> <span class="toc-text">Fiddler 模拟网络超时</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer" style="background-image: url('/img/default/13.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By Ave Bai</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    loader: {
+      source: {
+        '[tex]/amsCd': '[tex]/amscd'
+      }
+    },
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        addClass: [200,() => {
+          document.querySelectorAll('mjx-container:not([display=\'true\']').forEach( node => {
+            const target = node.parentNode
+            if (!target.classList.contains('has-jax')) {
+              target.classList.add('mathjax-overflow')
+            }
+          })
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><script>if (document.getElementsByClassName('mermaid').length) {
+  if (window.mermaidJsLoad) mermaid.init()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(() => {
+      window.mermaidJsLoad = true
+      mermaid.initialize({
+        theme: 'default',
+      })
+      false && mermaid.init()
+    })
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

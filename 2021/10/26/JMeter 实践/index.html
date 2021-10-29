@@ -1,0 +1,335 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>JMeter实践 | 浮生孰来</title><meta name="keywords" content="软件测试"><meta name="author" content="Ave Bai"><meta name="copyright" content="Ave Bai"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="[TOC] JMeter 模拟 HTTP 请求创建测试任务在 JMeter 中，任何类型的测试都需要先创建线程组，一个线程组可以看作一个测试任务。 （1）添加线程组。用鼠标右键单击“测试计划”，在快捷菜单中单击添加 -&gt; 线程(用户) -&gt; 线程组。 （2）设置线程组。线程组主要包括 3 个参数：  线程数：一个线程代表一个虚拟用户。  Ramp-Up Period(in second">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JMeter实践">
+<meta property="og:url" content="http://10185102110.github.io/2021/10/26/JMeter%20%E5%AE%9E%E8%B7%B5/index.html">
+<meta property="og:site_name" content="浮生孰来">
+<meta property="og:description" content="[TOC] JMeter 模拟 HTTP 请求创建测试任务在 JMeter 中，任何类型的测试都需要先创建线程组，一个线程组可以看作一个测试任务。 （1）添加线程组。用鼠标右键单击“测试计划”，在快捷菜单中单击添加 -&gt; 线程(用户) -&gt; 线程组。 （2）设置线程组。线程组主要包括 3 个参数：  线程数：一个线程代表一个虚拟用户。  Ramp-Up Period(in second">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://10185102110.github.io/img/default/8.jpg">
+<meta property="article:published_time" content="2021-10-26T12:06:36.000Z">
+<meta property="article:modified_time" content="2021-10-29T16:47:04.645Z">
+<meta property="article:author" content="Ave Bai">
+<meta property="article:tag" content="软件测试">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://10185102110.github.io/img/default/8.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://10185102110.github.io/2021/10/26/JMeter%20%E5%AE%9E%E8%B7%B5/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="baidu_site_verification"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?211d055ab9f6b88805047adca6ce783d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'JMeter实践',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-10-30 00:47:04'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><link rel="stylesheet" href="/css/bilibili.css"><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="浮生孰来" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">30</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/picture/"><i class="fa-fw fas fa-camera"></i><span> 图库</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/default/8.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">浮生孰来</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/picture/"><i class="fa-fw fas fa-camera"></i><span> 图库</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">JMeter实践</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-10-26T12:06:36.000Z" title="发表于 2021-10-26 20:06:36">2021-10-26</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-10-29T16:47:04.645Z" title="更新于 2021-10-30 00:47:04">2021-10-30</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/">软件测试</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">3.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>11分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="JMeter实践"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>[TOC]</p>
+<h1 id="JMeter-模拟-HTTP-请求"><a href="#JMeter-模拟-HTTP-请求" class="headerlink" title="JMeter 模拟 HTTP 请求"></a>JMeter 模拟 HTTP 请求</h1><h2 id="创建测试任务"><a href="#创建测试任务" class="headerlink" title="创建测试任务"></a>创建测试任务</h2><p>在 JMeter 中，任何类型的测试都需要先创建线程组，一个线程组可以看作一个测试任务。</p>
+<p>（1）添加线程组。用鼠标右键单击“测试计划”，在快捷菜单中单击添加 -&gt; 线程(用户) -&gt; 线程组。</p>
+<p>（2）设置线程组。线程组主要包括 3 个参数：</p>
+<ul>
+<li><p>线程数：一个线程代表一个虚拟用户。</p>
+</li>
+<li><p>Ramp-Up Period(in seconds)：设置线程的启动时长，单位为秒。如果线程数是 100，启动时长为 5s，那么需要 5s 启动 100 个线程，平均每秒启动 20 个线程。</p>
+</li>
+<li><p>循环次数：每个线程发送请求的次数。如果这个线程组中有 5 个HTTP请求，循环次数为 3 的话，那么一个线程会发送 5×3=15 个 HTTP 请求。如果选中了“永远”复选框，那么所有的线程会无限循环发送请求，直到手动单击工具栏上的停止按钮。</p>
+</li>
+</ul>
+<p>如果用来做功能测试/接口测试，那么应保持默认设置。</p>
+<p><img src="2.png" alt=""></p>
+<h2 id="模拟网页-MD5-加密"><a href="#模拟网页-MD5-加密" class="headerlink" title="模拟网页 MD5 加密"></a>模拟网页 MD5 加密</h2><p>有一个 MD5 在线网站 <a target="_blank" rel="noopener" href="http://www.md5.cz/，利用它可以对密码进行散列处理。用">http://www.md5.cz/，利用它可以对密码进行散列处理。用</a> Fiddler 对这个网站进行抓包，然后用 JMeter 来实现。具体的操作步骤如下。</p>
+<p>（1）启动 Fiddler，打开浏览器，输入 <a target="_blank" rel="noopener" href="http://ww.md5.cz/，在页面中输入“password”，然后单击按钮“hash">http://ww.md5.cz/，在页面中输入“password”，然后单击按钮“hash</a> darling, hash!”。</p>
+<p><img src="0.png" alt=""></p>
+<p><img src="1.png" alt=""></p>
+<p>能看到浏览器发出的 HTTP 请求报文如下：</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">POST</span> <span class="string">http://www.md5.cz/getmd5.php</span> <span class="meta">HTTP/1.1</span></span><br><span class="line"><span class="attribute">Host</span><span class="punctuation">: </span>www.md5.cz</span><br><span class="line"><span class="attribute">Connection</span><span class="punctuation">: </span>keep-alive</span><br><span class="line"><span class="attribute">Content-Length</span><span class="punctuation">: </span>13</span><br><span class="line"><span class="attribute">User-Agent</span><span class="punctuation">: </span>Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36 Edg/95.0.1020.30</span><br><span class="line"><span class="attribute">Content-type</span><span class="punctuation">: </span>application/x-www-form-urlencoded</span><br><span class="line"><span class="attribute">Accept</span><span class="punctuation">: </span>*/*</span><br><span class="line"><span class="attribute">Origin</span><span class="punctuation">: </span>http://www.md5.cz</span><br><span class="line"><span class="attribute">Referer</span><span class="punctuation">: </span>http://www.md5.cz/</span><br><span class="line"><span class="attribute">Accept-Encoding</span><span class="punctuation">: </span>gzip, deflate</span><br><span class="line"><span class="attribute">Accept-Language</span><span class="punctuation">: </span>zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6</span><br><span class="line"><span class="attribute">Cookie</span><span class="punctuation">: </span>_ga=GA1.2.1991138354.1635224796; _gid=GA1.2.478924991.1635224796</span><br><span class="line"></span><br><span class="line"><span class="ini"><span class="attr">what</span>=password</span></span><br></pre></td></tr></table></figure>
+<p>（2）打开 JMeter，右击线程组-&gt;添加-&gt;取样器-&gt;HTTP 请求，参数按照报文填写：</p>
+<p><img src="3.png" alt=""></p>
+<p>（3）右击 HTTP请求-&gt;添加-&gt;配置元件-&gt;HTTP信息头管理器，添加 HTTP Header。可以先在 Fiddler 中复制所有的 HTTP Header，然后单击“从剪贴板添加”。由于 JMeter 自动添加 Host，所以不需要手动添加，如果有则需要删除。</p>
+<p><img src="4.png" alt=""></p>
+<p>（4）右击线程组-&gt;添加-&gt;监听器-&gt;察看结果树。运行JMeter，单击工具栏上的绿色按钮，可以运行脚本。通过结果树可以看到我们发出的 HTTP请求以及 Web 服务器返回的 HTTP 响应。</p>
+<p><img src="5.png" alt=""></p>
+<h1 id="JMeter-天气接口自动化测试"><a href="#JMeter-天气接口自动化测试" class="headerlink" title="JMeter 天气接口自动化测试"></a>JMeter 天气接口自动化测试</h1><h2 id="Fiddler-抓包分析"><a href="#Fiddler-抓包分析" class="headerlink" title="Fiddler 抓包分析"></a>Fiddler 抓包分析</h2><p>（1）启动 Fiddler，单击菜单栏中 Rules -&gt; Hide Image Requests。抓包的时候把图片的包隐藏。</p>
+<p>（2）打开浏览器，打开 <a target="_blank" rel="noopener" href="http://www.weather.com.cn/。在“城市名称”中输入“上海”，单击查询。">http://www.weather.com.cn/。在“城市名称”中输入“上海”，单击查询。</a></p>
+<p>（3）抓到几十个包，但分析下来主要有两步操作：</p>
+<ul>
+<li><p>​    获取城市代码。发送一个 GET 请求到 <a target="_blank" rel="noopener" href="http://toy1.weather.com.cn/search?cityname=%E4%B8%8A%E6%B5%B7&amp;callback=success_jsonpCallback&amp;_=1635227081722">http://toy1.weather.com.cn/search?cityname=%E4%B8%8A%E6%B5%B7&amp;callback=success_jsonpCallback&amp;_=1635227081722</a> ，“上海”被 URLEncode 后变成了 “%E4%B8%8A%E6%B5%B7”，从这个响应中可以得到上海的地区代码。</p>
+<p><img src="6.png" alt=""></p>
+</li>
+<li><p>获取城市的天气数据。发送一个 GET 请求到 <a target="_blank" rel="noopener" href="http://www.weather.com.cn/weather1d/101020100.shtml">http://www.weather.com.cn/weather1d/101020100.shtml</a> 得到该城市的天气数据。</p>
+<p><img src="7.png" alt=""></p>
+</li>
+</ul>
+<p>这两个请求必须带上一个叫“Referer”的 Header，Referer 的作用就是用来追踪来源的。</p>
+<h2 id="JMeter-实现参数化"><a href="#JMeter-实现参数化" class="headerlink" title="JMeter 实现参数化"></a>JMeter 实现参数化</h2><p>（1）启动JMeter，在线程组下面新建一个 HTTP 请求，将其命名为 GetCityCode。发送一个Get方法的HTTP请求到 <a target="_blank" rel="noopener" href="http://toy1.weather.com.cn/search?cityname=上海。添加一个HTTP信息头管理器，添加一个">http://toy1.weather.com.cn/search?cityname=上海。添加一个HTTP信息头管理器，添加一个</a> Referer：</p>
+<p><img src="8.png" alt=""></p>
+<p>（2）添加验证点。选择 GetCityCode 这个 HTTP 请求，右击-&gt;添加-&gt;断言-&gt;响应断言。右击线程组-&gt;添加-&gt;监听器-&gt;断言结果。匹配结果会显示到断言结果中，成功则只显示 HTTP 请求名称，失败则显示 HTTP 名称和没有匹配到的第一项。</p>
+<p><img src="9.png" alt=""></p>
+<p>（3）使用用户自定义变量。右击线程组-&gt;添加-&gt;配置元件-&gt;用户定义的变量。添加一个变量 city，其值设为“上海”。</p>
+<p><img src="10.png" alt=""></p>
+<p>在 GetCityCode 中使用这个变量：</p>
+<p><img src="11.png" alt=""></p>
+<p>这样就实现了参数化，以后修改城市的时候，只要修改用户自定义变量就可以。</p>
+<h2 id="正则表达式提取城市地区代码"><a href="#正则表达式提取城市地区代码" class="headerlink" title="正则表达式提取城市地区代码"></a>正则表达式提取城市地区代码</h2><p>（1）选择 GetCityCode 这个 HTTP 请求，用鼠标右键选择添加-&gt;后置处理器-&gt;正则表达式提取器。</p>
+<p><img src="12.png" alt=""></p>
+<p>通过正则表达式提取器把城市代码提取出来，并且存到变量 citycode，然后把这个变量提供给第二个 HTTP 请求使用。</p>
+<p>关联：一个 HTTP 请求使用了另一个 HTTP 请求中的数据，两个请求之间发生了关联。</p>
+<p>（2）新建第二个 HTTP 请求，命名为 GetWeather。发送一个 GET 请求到 <a target="_blank" rel="noopener" href="http://www.weather">http://www.weather</a>. com.cn/weather1d/${citycode}.shtml。运行结果如下：</p>
+<p><img src="13.png" alt=""></p>
+<p>到这里天气接口的简单自动化测试就完成了。</p>
+<h1 id="BeanShell"><a href="#BeanShell" class="headerlink" title="BeanShell"></a>BeanShell</h1><p>BeanShell 是一个小型的 Java 源代码解释器，具有对象脚本语言特性。其能够动态执行标准 Java 语法，可以通过脚本来处理 Java 应用程序。</p>
+<p>BeanShell 使用内置对象 vars 对变量进行存取操作。</p>
+<ul>
+<li><code>vars.get(&quot;name&quot;)</code>：从 JMeter 中获得变量值。</li>
+<li><code>vars.put(&quot;key&quot;，&quot;value&quot;)</code>：数据存到 JMeter 变量中。</li>
+</ul>
+<p><strong>实例：BeanShell 调用自己写的 jar 包进行 MD5 加密</strong></p>
+<p>（1）在 Eclipse 新建工程，添加一个 class 文件，代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> md5;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.security.MessageDigest;</span><br><span class="line"><span class="keyword">import</span> java.security.NoSuchAlgorithmException;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">md5</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getMd5</span><span class="params">(String plainText)</span> </span>&#123; </span><br><span class="line">		<span class="keyword">try</span> &#123; </span><br><span class="line">			MessageDigest md = MessageDigest.getInstance(<span class="string">&quot;MD5&quot;</span>); </span><br><span class="line">            md.update(plainText.getBytes()); </span><br><span class="line">            <span class="keyword">byte</span> b[] = md.digest(); </span><br><span class="line"></span><br><span class="line">            <span class="keyword">int</span> i; </span><br><span class="line"></span><br><span class="line">            StringBuffer buf = <span class="keyword">new</span> StringBuffer(<span class="string">&quot;&quot;</span>); </span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> offset = <span class="number">0</span>; offset &lt; b.length; offset++) &#123; </span><br><span class="line">                i = b[offset]; </span><br><span class="line">                <span class="keyword">if</span> (i &lt; <span class="number">0</span>) </span><br><span class="line">                	i += <span class="number">256</span>; </span><br><span class="line">                    <span class="keyword">if</span> (i &lt; <span class="number">16</span>) </span><br><span class="line">                        buf.append(<span class="string">&quot;0&quot;</span>); </span><br><span class="line">                    buf.append(Integer.toHexString(i)); </span><br><span class="line">                &#125; </span><br><span class="line">                <span class="comment">//32位加密 </span></span><br><span class="line">                <span class="keyword">return</span> buf.toString(); </span><br><span class="line">                <span class="comment">// 16位的加密 </span></span><br><span class="line">                <span class="comment">//return buf.toString().substring(8, 24); </span></span><br><span class="line">            &#125; <span class="keyword">catch</span> (NoSuchAlgorithmException e) &#123; </span><br><span class="line">                e.printStackTrace(); </span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">null</span>; </span><br><span class="line">            &#125; </span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>将工程导出为一个 jar 文件，取名为 md5.jar。</p>
+<p>（2）启动 JMeter，在测试计划中引入这个 jar 包。</p>
+<p><img src="14.png" alt=""></p>
+<p>（3）在线程组中添加一个 BeanShell 取样器、一个调试取样器和一个查看结果树。</p>
+<p><img src="15.png" alt=""></p>
+<p><img src="16.png" alt=""></p>
+<p>调试取样器中查看变量，可以看到密码被加密。</p>
+<h1 id="自动登录禅道"><a href="#自动登录禅道" class="headerlink" title="自动登录禅道"></a>自动登录禅道</h1><h2 id="HTTP-Cookie-管理器"><a href="#HTTP-Cookie-管理器" class="headerlink" title="HTTP Cookie 管理器"></a>HTTP Cookie 管理器</h2><p>HTTP 协议本身是无状态的，为了维持登录的状态引入 Cookie 机制。</p>
+<p>Cookie 的流程如下：<br>（1）浏览器发送第一个 HTTP 请求给 Web 服务器，里面包含用户名和密码。Web 服务器验证用户名和密码后，把登录相关的 Cookie 发送给浏览器客户端。<br>（2）浏览器客户端再一次访问的时候，会带上 Cookie，这样才处于登录状态，否则会被服务器跳转到登录页面。</p>
+<p>用 JMeter 来模拟整个登录过程，需要在第一次登录后，用正则表达式提取器把登录相关的 Cookie 提取出来，然后把登录的 Cookie 插入后续的 HTTP 请求中形成关联。</p>
+<p>JMeter 中的 HTTP Cookie 管理器可以自动管理 Cookie。如果 HTTP 响应中包含 Cookie，那么 HTTP Cookie 管理器会自动保存这些 Cookie。用户再次访问该站点时，HTTP 请求会自动使用这些 Cookie。一个线程组有自己存储 Cookie 的区域，并且一个线程组只能添加一个 HTTP Cookie 管理器。</p>
+<p>选择线程组，用鼠标右键单击添加-&gt;配置元件-&gt;HTTP Cookie 管理器。</p>
+<h2 id="自动登录禅道-1"><a href="#自动登录禅道-1" class="headerlink" title="自动登录禅道"></a>自动登录禅道</h2><p>（1）启动 Fiddler，启动过滤。在 Filter 选项卡中激活 Filter，并且在 Response Type and size 中选中“Show only HTML”。</p>
+<p>（2）打开浏览器，输入 <a target="_blank" rel="noopener" href="http://127.0.0.1:80/index.php（我部署的禅道地址），然后输入用户名和密码，单击“登录”。">http://127.0.0.1:80/index.php（我部署的禅道地址），然后输入用户名和密码，单击“登录”。</a></p>
+<p>（3）从抓包可以看到，首先用 GET 方法得到一个数字（就是 verifyRand），然后用 POST 方法登录，但是密码是加密后发送给服务器的，Body 中的数据是 account=admin&amp;password=372539499122ad0a7085743c6c322bc8&amp;passwordStrength=1&amp;referer=%2Fzentao%2F&amp;verifyRand=527812645&amp;keepLogin=0&amp;captcha=。</p>
+<p><img src="17.png" alt=""></p>
+<p><img src="18.png" alt=""></p>
+<p>（4）用浏览器的开发工具查看源代码，可以发现一个叫 md5 的 js 包。</p>
+<p><img src="19.png" alt=""></p>
+<p>查看登录页面的源代码发现加密规则是 <code>md5(md5(password) + rand)</code>，rand 就是上面说的 verifyRand，每次登录请求都会刷新。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&#x27;#loginPanel #submit&#x27;</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">var</span> account          = $(<span class="string">&#x27;#account&#x27;</span>).val().trim();</span><br><span class="line">    <span class="keyword">var</span> password         = $(<span class="string">&#x27;input:password&#x27;</span>).val().trim();</span><br><span class="line">    <span class="keyword">var</span> passwordStrength = computePasswordStrength(password);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> hasMD5    = <span class="keyword">typeof</span>(md5) == <span class="string">&#x27;function&#x27;</span>;</span><br><span class="line">    <span class="keyword">var</span> referer   = $(<span class="string">&#x27;#referer&#x27;</span>).val();</span><br><span class="line">    <span class="keyword">var</span> link      = createLink(<span class="string">&#x27;user&#x27;</span>, <span class="string">&#x27;login&#x27;</span>);</span><br><span class="line">    <span class="keyword">var</span> keepLogin = $(<span class="string">&#x27;#keepLoginon&#x27;</span>).attr(<span class="string">&#x27;checked&#x27;</span>) == <span class="string">&#x27;checked&#x27;</span> ? <span class="number">1</span> : <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">var</span> captcha   = $(<span class="string">&#x27;#captcha&#x27;</span>).length == <span class="number">1</span> ? $(<span class="string">&#x27;#captcha&#x27;</span>).val() : <span class="string">&#x27;&#x27;</span>;</span><br><span class="line"></span><br><span class="line">    $.get(createLink(<span class="string">&#x27;user&#x27;</span>, <span class="string">&#x27;refreshRandom&#x27;</span>), <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> rand = data;</span><br><span class="line">        $.ajax</span><br><span class="line">        (&#123;</span><br><span class="line">            <span class="attr">url</span>: link,</span><br><span class="line">            <span class="attr">dataType</span>: <span class="string">&#x27;json&#x27;</span>,</span><br><span class="line">            <span class="attr">method</span>: <span class="string">&#x27;POST&#x27;</span>,</span><br><span class="line">            <span class="attr">data</span>: </span><br><span class="line">            &#123;</span><br><span class="line">                <span class="string">&quot;account&quot;</span>: account, </span><br><span class="line">                <span class="string">&quot;password&quot;</span>: hasMD5 ? md5(md5(password) + rand) : password,</span><br><span class="line">                <span class="string">&#x27;passwordStrength&#x27;</span> : passwordStrength,</span><br><span class="line">                <span class="string">&#x27;referer&#x27;</span> : referer,</span><br><span class="line">                <span class="string">&#x27;verifyRand&#x27;</span> : rand,</span><br><span class="line">                <span class="string">&#x27;keepLogin&#x27;</span> : keepLogin,</span><br><span class="line">                <span class="string">&#x27;captcha&#x27;</span> : captcha</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">success</span>:<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span></span><br><span class="line"><span class="function">            </span>&#123;</span><br><span class="line">                <span class="keyword">if</span>(data.result == <span class="string">&#x27;fail&#x27;</span>) </span><br><span class="line">                &#123;</span><br><span class="line">                    alert(data.message);</span><br><span class="line">                    <span class="keyword">if</span>($(<span class="string">&#x27;.captchaBox&#x27;</span>).length == <span class="number">1</span>) $(<span class="string">&#x27;.captchaBox .input-group .input-group-addon img&#x27;</span>).click();</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                location.href = data.locate;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>（5）重新写一个 jar 包实现禅道的加密，在测试计划中引入这个 jar 包。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> md5;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.security.MessageDigest;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">md5</span> </span>&#123;</span><br><span class="line">	<span class="comment">//主函数</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">encode</span><span class="params">(String key,String rand)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> md5(md5(key) + rand);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">//md5加密算法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">md5</span><span class="params">(String plainText)</span> </span>&#123;</span><br><span class="line">        String result = <span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            MessageDigest md = MessageDigest.getInstance(<span class="string">&quot;MD5&quot;</span>);</span><br><span class="line">            md.update(plainText.getBytes());</span><br><span class="line">            <span class="keyword">byte</span> b[] = md.digest();</span><br><span class="line">            <span class="keyword">int</span> i;</span><br><span class="line">            StringBuffer buf = <span class="keyword">new</span> StringBuffer(<span class="string">&quot;&quot;</span>);</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> offset = <span class="number">0</span>; offset &lt; b.length; offset++) &#123;</span><br><span class="line">                i = b[offset];</span><br><span class="line">                <span class="keyword">if</span> (i &lt; <span class="number">0</span>)</span><br><span class="line">                    i += <span class="number">256</span>;</span><br><span class="line">                <span class="keyword">if</span> (i &lt; <span class="number">16</span>)</span><br><span class="line">                    buf.append(<span class="string">&quot;0&quot;</span>);</span><br><span class="line">                buf.append(Integer.toHexString(i));</span><br><span class="line">            &#125;</span><br><span class="line">            result = buf.toString();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>（6）选择线程组，添加一个 HTTP Cookie 管理器，用来自动管理Cookie。</p>
+<p>（7）选择线程组，添加一个 HTTP 请求默认值，填写的内容如图：</p>
+<p><img src="20.png" alt=""></p>
+<p>（8）选择线程组，添加用户自定义的变量。</p>
+<p><img src="21.png" alt=""></p>
+<p>（9）选择线程组，添加一个 HTTP 请求，命名为 Getverify，用来获取随机生成的 verifyRand，</p>
+<p>GET <a target="_blank" rel="noopener" href="http://127.0.0.1/zentao/user-refreshRandom.html。在这个请求下添加一个">http://127.0.0.1/zentao/user-refreshRandom.html。在这个请求下添加一个</a> HTTP 信息头管理器和一个 JSON 提取器。</p>
+<p><img src="22.png" alt=""></p>
+<p>（10）选择线程组，添加一个 BeanShell 取样器和一个调试取样器。</p>
+<p><img src="23.png" alt=""></p>
+<p>（11）选择线程组，添加一个 HTTP 请求，命名为 Login，用来登录禅道。添加一个 HTTP 信息头管理器，不填 Host 和 Cookie。</p>
+<p><img src="24.png" alt=""></p>
+<p>（12）添加一个察看结果树，运行就可以看到成功登录了。</p>
+<p><img src="25.png" alt=""></p>
+<h1 id="JMeter-给网站做压力测试"><a href="#JMeter-给网站做压力测试" class="headerlink" title="JMeter 给网站做压力测试"></a>JMeter 给网站做压力测试</h1><p>在一台电脑用 JMeter 模拟 200 个用户，同时去使用 bing 搜索不同的关键字， 查看页面返回的时间是否在正常范围内。</p>
+<p>（1）首先把测试需要用到的 2 个参数放在 txt 文件中，新建一个 data.txt 文件，输入些数据， 一行有两个数据，用逗号分隔。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">百度百科,苹果</span><br><span class="line">百度百科,西瓜</span><br><span class="line">百度百科,香蕉</span><br><span class="line">百度百科,菠萝</span><br><span class="line">百度百科,杨梅</span><br></pre></td></tr></table></figure>
+<p>（2）启动 JMeter，先添加一个线程组，然后右击添加-&gt;配置元件-&gt;CSV数据文件设置。</p>
+<p><img src="26.png" alt=""></p>
+<p>（3）添加 HTTP 请求，发送 GET 到 <a target="_blank" rel="noopener" href="http://cn.bing.com/search?q=testteststtssdfds">http://cn.bing.com/search?q=</a>百度百科+水果名称。</p>
+<p><img src="27.png" alt=""></p>
+<p>（3）选中线程组，修改配置。</p>
+<p><img src="28.png" alt=""></p>
+<p>Ramp-Up 时间(秒):：设置线程需要多长时间全部启动。如果线程数为 200 ，准备时长为 10 ，那么需要每秒钟启动 20 个线程。</p>
+<p>循环次数：每个线程发送请求的次数。如果线程数为 200 ，循环次数为 10 ，那么每个线程发送 10 次请求。总请求数为 200*10=2000 。</p>
+<p>（4）添加汇总报告，运行并查看报告。</p>
+<p><img src="29.png" alt=""></p>
+<ul>
+<li>异常%：本次测试中出现错误请求的数量。正常情况下应该是 0.00%。否则就是功能出现了问题。也就是当大量用户访问的时候，造成了功能失败的问题，这个问题很严重。</li>
+<li>平均值：平均响应时间，单位是 ms。对于一个 HTTP 请求来说，响应时间应该在 200ms 之内，但是图中的平均响应时间是 8007ms，说明性能非常差。</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Ave Bai</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://10185102110.github.io/2021/10/26/JMeter%20%E5%AE%9E%E8%B7%B5/">http://10185102110.github.io/2021/10/26/JMeter%20%E5%AE%9E%E8%B7%B5/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://10185102110.github.io" target="_blank">浮生孰来</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/">软件测试</a></div><div class="post_share"><div class="social-share" data-image="/img/default/8.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2021/10/20/fiddler%E6%8A%93%E5%8C%85/"><img class="next-cover" src="/img/default/13.jpg" onerror="onerror=null;src='/img/default.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Fiddler抓包</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2021/10/20/fiddler抓包/" title="Fiddler抓包"><img class="cover" src="/img/default/13.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-10-20</div><div class="title">Fiddler抓包</div></div></a></div><div><a href="/2021/09/23/高质量代码/" title="高质量代码"><img class="cover" src="/img/default/3.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-09-23</div><div class="title">高质量代码</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JMeter-%E6%A8%A1%E6%8B%9F-HTTP-%E8%AF%B7%E6%B1%82"><span class="toc-number">1.</span> <span class="toc-text">JMeter 模拟 HTTP 请求</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%B5%8B%E8%AF%95%E4%BB%BB%E5%8A%A1"><span class="toc-number">1.1.</span> <span class="toc-text">创建测试任务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E6%8B%9F%E7%BD%91%E9%A1%B5-MD5-%E5%8A%A0%E5%AF%86"><span class="toc-number">1.2.</span> <span class="toc-text">模拟网页 MD5 加密</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#JMeter-%E5%A4%A9%E6%B0%94%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95"><span class="toc-number">2.</span> <span class="toc-text">JMeter 天气接口自动化测试</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Fiddler-%E6%8A%93%E5%8C%85%E5%88%86%E6%9E%90"><span class="toc-number">2.1.</span> <span class="toc-text">Fiddler 抓包分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JMeter-%E5%AE%9E%E7%8E%B0%E5%8F%82%E6%95%B0%E5%8C%96"><span class="toc-number">2.2.</span> <span class="toc-text">JMeter 实现参数化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%8F%90%E5%8F%96%E5%9F%8E%E5%B8%82%E5%9C%B0%E5%8C%BA%E4%BB%A3%E7%A0%81"><span class="toc-number">2.3.</span> <span class="toc-text">正则表达式提取城市地区代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#BeanShell"><span class="toc-number">3.</span> <span class="toc-text">BeanShell</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E7%99%BB%E5%BD%95%E7%A6%85%E9%81%93"><span class="toc-number">4.</span> <span class="toc-text">自动登录禅道</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP-Cookie-%E7%AE%A1%E7%90%86%E5%99%A8"><span class="toc-number">4.1.</span> <span class="toc-text">HTTP Cookie 管理器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E7%99%BB%E5%BD%95%E7%A6%85%E9%81%93-1"><span class="toc-number">4.2.</span> <span class="toc-text">自动登录禅道</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#JMeter-%E7%BB%99%E7%BD%91%E7%AB%99%E5%81%9A%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95"><span class="toc-number">5.</span> <span class="toc-text">JMeter 给网站做压力测试</span></a></li></ol></div></div></div></div></main><footer id="footer" style="background-image: url('/img/default/8.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By Ave Bai</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    loader: {
+      source: {
+        '[tex]/amsCd': '[tex]/amscd'
+      }
+    },
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        addClass: [200,() => {
+          document.querySelectorAll('mjx-container:not([display=\'true\']').forEach( node => {
+            const target = node.parentNode
+            if (!target.classList.contains('has-jax')) {
+              target.classList.add('mathjax-overflow')
+            }
+          })
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><script>if (document.getElementsByClassName('mermaid').length) {
+  if (window.mermaidJsLoad) mermaid.init()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(() => {
+      window.mermaidJsLoad = true
+      mermaid.initialize({
+        theme: 'default',
+      })
+      false && mermaid.init()
+    })
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
