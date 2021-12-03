@@ -1,0 +1,467 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Java实现的X0语言编译器 | 浮生孰来</title><meta name="keywords" content="Java"><meta name="author" content="Ave Bai"><meta name="copyright" content="Ave Bai"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="[TOC] 介绍编译器是将高级语言编写的程序转换成能在一台计算机上执行的等价目标代码或机器语言程序的软件系统。可以扩展到包含将一种高级语言程序转换成另一种高级语言程序的系统，或者从一种机器语言程序转换成另一种机器语言程序的系统等等。 本项目由 Java 语言编写完成，可以将事先定义好的 X0 语言转换为中间语言（采用四元式），进一步转换成目标语言（与 PL&#x2F;0 语言相同的指令代码），并能用解释器运">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java实现的X0语言编译器">
+<meta property="og:url" content="http://10185102110.github.io/2021/12/01/X0%E7%BC%96%E8%AF%91%E5%99%A8/index.html">
+<meta property="og:site_name" content="浮生孰来">
+<meta property="og:description" content="[TOC] 介绍编译器是将高级语言编写的程序转换成能在一台计算机上执行的等价目标代码或机器语言程序的软件系统。可以扩展到包含将一种高级语言程序转换成另一种高级语言程序的系统，或者从一种机器语言程序转换成另一种机器语言程序的系统等等。 本项目由 Java 语言编写完成，可以将事先定义好的 X0 语言转换为中间语言（采用四元式），进一步转换成目标语言（与 PL&#x2F;0 语言相同的指令代码），并能用解释器运">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://10185102110.github.io/img/default/8.jpg">
+<meta property="article:published_time" content="2021-12-01T12:06:36.000Z">
+<meta property="article:modified_time" content="2021-12-03T06:31:22.880Z">
+<meta property="article:author" content="Ave Bai">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://10185102110.github.io/img/default/8.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://10185102110.github.io/2021/12/01/X0%E7%BC%96%E8%AF%91%E5%99%A8/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="baidu_site_verification"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?211d055ab9f6b88805047adca6ce783d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Java实现的X0语言编译器',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-12-03 14:31:22'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><link rel="stylesheet" href="/css/bilibili.css"><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="浮生孰来" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">39</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/picture/"><i class="fa-fw fas fa-camera"></i><span> 图库</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/default/8.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">浮生孰来</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/picture/"><i class="fa-fw fas fa-camera"></i><span> 图库</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Java实现的X0语言编译器</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-12-01T12:06:36.000Z" title="发表于 2021-12-01 20:06:36">2021-12-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-12-03T06:31:22.880Z" title="更新于 2021-12-03 14:31:22">2021-12-03</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Java/">Java</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>7分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Java实现的X0语言编译器"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>[TOC]</p>
+<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>编译器是将高级语言编写的程序转换成能在一台计算机上执行的等价目标代码或机器语言程序的软件系统。可以扩展到包含将一种高级语言程序转换成另一种高级语言程序的系统，或者从一种机器语言程序转换成另一种机器语言程序的系统等等。</p>
+<p>本项目由 Java 语言编写完成，可以将事先定义好的 X0 语言转换为中间语言（采用四元式），进一步转换成目标语言（与 PL/0 语言相同的指令代码），并能用解释器运行。本项目支持代码文件的读取，编译代码的键盘输入，词法分析、语法分析、出错处理、中间代码、目标代码、符号表和运行结果的输出。</p>
+<p>完整说明见设计文档。</p>
+<h2 id="编译器系统结构"><a href="#编译器系统结构" class="headerlink" title="编译器系统结构"></a>编译器系统结构</h2><p><img src="0.png" alt=""></p>
+<p>编译器的词法分析、语法分析、语义分析与中间代码生成、目标代码生成是按顺序依次进行的，语法分析通过后转入语法分析，若词法分析未通过则无法进行语法分析，语法分析通过后转入语义分析与中间代码生成，最后执行目标代码生成。</p>
+<h1 id="X0语言文法"><a href="#X0语言文法" class="headerlink" title="X0语言文法"></a>X0语言文法</h1><h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><ul>
+<li><p>该语言变量有整型、整型一维数组、字符型，原则是先声明再使用。</p>
+</li>
+<li><p>语句有 6 种：if 语句、while 语句、read 语句、write 语句、compound 语句和 expression 语句。if 语句没有悬挂 else 二义性。输入/输出语句由保留字 read 和 write 开始。read 语句一次只读一个变量，write 语句一句只写出一个表达式。</p>
+</li>
+<li><p>X0 语言有两类表达式：布尔表达式和算术表达式。算术运算是左结合的，具有通常的优先关系。比较运算是非结合性的：每个没有括号的表达式只允许一种比较运算。比较运算的优先级比算术运算低。</p>
+</li>
+<li><p>X0 语言没有过程或函数，因此没有调用。</p>
+</li>
+<li><p>注释符：多行注释用 /*…*/ 括起，单行注释用 // 开头。词法分析程序并不输出注释，在词法分析阶段，注释的内容将被删掉。</p>
+</li>
+<li><p>终结符：采用 #，在词法分析阶段隐性添加，并用于 LL(1) 语法分析。</p>
+</li>
+<li><p>扩展：</p>
+<p>1.for 语句。采用 Java 格式，例如 for(i=0;i&lt;10;i++){}。</p>
+<p>2.求余运算符 %，优先级同乘除。</p>
+</li>
+</ul>
+<h2 id="语法规则"><a href="#语法规则" class="headerlink" title="语法规则"></a>语法规则</h2><p>采用 EBNF 描述</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">program = &quot;main&quot; &quot;&#123;&quot; declaration_list statement_list &quot;&#125;&quot;.</span><br><span class="line">declaration_list = [declaration_list declaration_stat | declaration_stat]  .</span><br><span class="line">declaration_stat = type ID &quot;;&quot; | type ID &quot;[&quot; NUM &quot;]&quot; &quot;;&quot;.</span><br><span class="line">type = &quot;int&quot; | &quot;char&quot;.</span><br><span class="line">var = ID | ID &quot;[&quot; expression &quot;]&quot;.</span><br><span class="line">statement_list = statement_list statement.</span><br><span class="line">statement = if_stat | while_stat | read_stat | write_stat | compound_stat | expression_stat.</span><br><span class="line">if_stat = &quot;if&quot; &quot;(&quot; expression &quot;)&quot; statement [ &quot;else&quot; statement].</span><br><span class="line">while_stat = &quot;while&quot; &quot;(&quot; expression &quot;)&quot; statement .</span><br><span class="line">write_stat = &quot;write&quot; expression &quot;;&quot; .</span><br><span class="line">read_stat = &quot;read&quot; var &quot;;&quot;.</span><br><span class="line">compound_stat = &quot;&#123;&quot; statement_list &quot;&#125;&quot;.</span><br><span class="line">expression_stat = expression &quot;;&quot; | &quot;;&quot;.</span><br><span class="line">expression = var &quot;=&quot; expression | simple_expr.</span><br><span class="line">simple_expr = additive_expr | additive_expr (&quot;&gt;&quot; | &quot;&lt;&quot; | &quot;&gt;=&quot; | &quot;&lt;=&quot; | &quot;==&quot; | &quot;!=&quot; ) additive_expr.</span><br><span class="line">additive_expr = term &#123;(&quot;+&quot;|&quot;-&quot;) term &#125;.</span><br><span class="line">term = factor &#123;(&quot;*&quot;|&quot;/&quot;) factor &#125;.</span><br><span class="line">factor = &quot;(&quot; expression &quot;)&quot;| var | NUM.</span><br></pre></td></tr></table></figure>
+<h2 id="语法图"><a href="#语法图" class="headerlink" title="语法图"></a>语法图</h2><p><img src="5.png" alt=""></p>
+<p><img src="4.png" alt=""><img src="3.png" alt=""></p>
+<p><img src="2.png" alt=""><img src="1.png" alt=""></p>
+<h2 id="LL1文法"><a href="#LL1文法" class="headerlink" title="LL1文法"></a>LL1文法</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">S -&gt; main&#123;AU&#125;</span><br><span class="line">A -&gt; XA | $</span><br><span class="line">U -&gt; U&#x27;U</span><br><span class="line">U&#x27; -&gt; B | R | $</span><br><span class="line">X -&gt; YZ;</span><br><span class="line">Y -&gt; int | char | bool</span><br><span class="line">Z -&gt; idZ&#x27;</span><br><span class="line">Z&#x27; -&gt; [num] | $</span><br><span class="line">R -&gt; id=L;</span><br><span class="line">L -&gt; TL&#x27;</span><br><span class="line">L&#x27; -&gt; +L | -L | $</span><br><span class="line">T -&gt; FT&#x27;</span><br><span class="line">T&#x27; -&gt; *T | /T | %T | $</span><br><span class="line">F -&gt; id | num | (L)</span><br><span class="line">E -&gt; G</span><br><span class="line">G -&gt; LDL</span><br><span class="line">D -&gt; &lt; | &gt; | == | != | &lt;= | &gt;=</span><br><span class="line">G -&gt; (E)</span><br><span class="line">B -&gt; if (E)&#123;U&#125;</span><br><span class="line">B -&gt; while(E)&#123;U&#125;</span><br><span class="line">B -&gt; for(R;G;Q)&#123;U&#125;</span><br><span class="line">Q -&gt; idO | $</span><br><span class="line">O -&gt; ++ | -- | $</span><br><span class="line">B -&gt; write L;</span><br><span class="line">B -&gt; read id;</span><br></pre></td></tr></table></figure>
+<h2 id="判断是否符合两条限制规则"><a href="#判断是否符合两条限制规则" class="headerlink" title="判断是否符合两条限制规则"></a>判断是否符合两条限制规则</h2><p>限制规则如下：</p>
+<ol>
+<li><p>找出图中每一个分支点，考察每一个分支点的分支的头符号是否相异；</p>
+</li>
+<li><p>找出图中每一个透明结构（无需读入一个符号就可以贯通），考察每一个透明结构的头符号集合和其跟随符号集合是否相异。</p>
+</li>
+</ol>
+<p>经过分析上述语法图中符合两条限制规则。</p>
+<h2 id="过程调用相关图"><a href="#过程调用相关图" class="headerlink" title="过程调用相关图"></a>过程调用相关图</h2><p><img src="6.png" alt=""></p>
+<h2 id="语法出错定义"><a href="#语法出错定义" class="headerlink" title="语法出错定义"></a>语法出错定义</h2><ul>
+<li>语法分析步骤数过多</li>
+<li>语法错误，缺少xx符号</li>
+<li>没有主函数</li>
+<li>非法标识符</li>
+<li>非法语句</li>
+<li>非法数据类型</li>
+<li>声明缺少标识符</li>
+<li>未声明数组长度</li>
+<li>标识符未声明</li>
+<li>非法标识符，不能write</li>
+<li>非法标识符，不能read</li>
+<li>不能进行布尔运算的数据类型</li>
+<li>非法布尔运算符</li>
+<li>不能进行算术运算的数据类型</li>
+<li>for 格式错误，循环因子需要++或—</li>
+<li>词法分析未通过，无法进行语法分析</li>
+</ul>
+<h1 id="虚拟机"><a href="#虚拟机" class="headerlink" title="虚拟机"></a>虚拟机</h1><h2 id="组织结构"><a href="#组织结构" class="headerlink" title="组织结构"></a>组织结构</h2><p>用一个数组存放指令代码，最多存储 200 个指令。</p>
+<p>指令以字符串的形式储存，格式为：序号+指令名称+地址+指令数据。</p>
+<h2 id="指令系统及其解释"><a href="#指令系统及其解释" class="headerlink" title="指令系统及其解释"></a>指令系统及其解释</h2><p>指令格式同 PL/0 虚拟机。即：</p>
+<p>虚拟机指令结构 每条虚拟机指令包括三个字段： </p>
+<ol>
+<li><p>f：虚拟机指令名称</p>
+</li>
+<li><p>l：引用层与声明层的层次差或某些相近功能指令的区分码 </p>
+</li>
+<li><p>a：某些指令可传入的参数或运算指令的区分码</p>
+</li>
+</ol>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>LIT  0,a</th>
+<th>将数a置入栈顶</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LOD 0,a</td>
+<td>将 0,a 形成的栈地址变量值置入栈顶</td>
+</tr>
+<tr>
+<td>STO 0,a</td>
+<td>将栈顶值存到 0,a 形成的栈地址变量</td>
+</tr>
+<tr>
+<td>INT  0,a</td>
+<td>预留 a 个存储位置</td>
+</tr>
+<tr>
+<td>JMP 0,a</td>
+<td>无条件转移</td>
+</tr>
+<tr>
+<td>JPC 0,a</td>
+<td>条件转移</td>
+</tr>
+<tr>
+<td>OPR 0,a</td>
+<td>算术关系运算符</td>
+</tr>
+<tr>
+<td>当 a = 0</td>
+<td>返回调用程序</td>
+</tr>
+<tr>
+<td>当 a = 2</td>
+<td>相加</td>
+</tr>
+<tr>
+<td>当 a = 3</td>
+<td>相减</td>
+</tr>
+<tr>
+<td>当 a = 4</td>
+<td>相乘</td>
+</tr>
+<tr>
+<td>当 a = 5</td>
+<td>相除</td>
+</tr>
+<tr>
+<td>当 a = 6</td>
+<td>自加</td>
+</tr>
+<tr>
+<td>当 a = 7</td>
+<td>自减</td>
+</tr>
+<tr>
+<td>当 a = 8</td>
+<td>判相等</td>
+</tr>
+<tr>
+<td>当 a = 9</td>
+<td>判不等</td>
+</tr>
+<tr>
+<td>当 a = 10</td>
+<td>判小于</td>
+</tr>
+<tr>
+<td>当 a = 11</td>
+<td>判小于等于</td>
+</tr>
+<tr>
+<td>当 a = 12</td>
+<td>判大于</td>
+</tr>
+<tr>
+<td>当 a = 13</td>
+<td>判大于等于</td>
+</tr>
+<tr>
+<td>当 a = 14</td>
+<td>求余</td>
+</tr>
+<tr>
+<td>当 a = 15</td>
+<td>输出</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>read 没有专门的指令，将翻译为 LIT+STO。</p>
+<h2 id="中间代码"><a href="#中间代码" class="headerlink" title="中间代码"></a>中间代码</h2><p>编译器采用四元式作为中间代码，格式为：序号 + (运算符,操作数1,操作数 2,结果/跳转地址)。</p>
+<p>其中运算符为 FJ 时表示 if、for、while 语句块的开始，若不满足条件则跳转到 RJ 的下一句；RJ 表示 if、for、while 语句块一次循环的结束，并无条件跳转到语句块的开始。</p>
+<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><h2 id="测试环境"><a href="#测试环境" class="headerlink" title="测试环境"></a>测试环境</h2><p>Windows 10 家庭版</p>
+<p>IntelliJ IDEA 2021.2</p>
+<p>jdk 1.8.0_301</p>
+<h2 id="测试用例"><a href="#测试用例" class="headerlink" title="测试用例"></a>测试用例</h2><h3 id="No-1"><a href="#No-1" class="headerlink" title="No.1"></a>No.1</h3><ul>
+<li><p>测试目标：求 2~100 之间的全部素数</p>
+</li>
+<li><p>源程序：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">/* 求2~100之间的全部素数*/</span><br><span class="line"></span><br><span class="line">main &#123;</span><br><span class="line">    int num;</span><br><span class="line">    int i;    // 用于遍历</span><br><span class="line">    int fac;</span><br><span class="line">    int tag;  // 布尔符号</span><br><span class="line">    i = 2;</span><br><span class="line">    num = 100;</span><br><span class="line">    while(i &lt;= num)&#123;</span><br><span class="line">        tag = 0;</span><br><span class="line">        fac = 2;</span><br><span class="line">        while(fac &lt; i)&#123;</span><br><span class="line">            if(i%fac == 0)&#123;</span><br><span class="line">                tag = 1;</span><br><span class="line">            &#125;</span><br><span class="line">            fac = fac+1;</span><br><span class="line">        &#125;</span><br><span class="line">        if(tag == 0)&#123;</span><br><span class="line">            write i;  // 输出素数</span><br><span class="line">        &#125;</span><br><span class="line">        i = i+1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>测试步骤：</p>
+<ol>
+<li><p>运行主程序</p>
+</li>
+<li><p>点击符号表</p>
+</li>
+<li>点击词法分析</li>
+<li>点击语法分析</li>
+<li>点击中间代码</li>
+<li>点击目标代码</li>
+<li>点击运行结果</li>
+</ol>
+</li>
+<li><p>测试结果：</p>
+<p><img src="8.png" alt=""></p>
+<p><img src="9.png" alt=""></p>
+<p><img src="10.png" alt=""></p>
+<p><img src="11.png" alt=""></p>
+<p><img src="12.png" alt=""></p>
+<p><img src="13.png" alt=""></p>
+</li>
+</ul>
+<h3 id="No-2"><a href="#No-2" class="headerlink" title="No.2"></a>No.2</h3><ul>
+<li><p>测试目标：求两个数的最小公倍数</p>
+</li>
+<li><p>源程序：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">/* 求两个数的最小公倍数*/</span><br><span class="line"></span><br><span class="line">main&#123;</span><br><span class="line">    int a;</span><br><span class="line">    int b;</span><br><span class="line">    int c;</span><br><span class="line">    int x;</span><br><span class="line">    int y;</span><br><span class="line">    read a;</span><br><span class="line">    read b;</span><br><span class="line">    if(a &lt; b)&#123;</span><br><span class="line">        //令a为较大的数</span><br><span class="line">        c = a;</span><br><span class="line">        a = b;</span><br><span class="line">        b = c;</span><br><span class="line">    &#125;</span><br><span class="line">    x = a;</span><br><span class="line">    y = b;</span><br><span class="line">    while (x % y != 0)</span><br><span class="line">    &#123;</span><br><span class="line">        x = x + a;</span><br><span class="line">    &#125;</span><br><span class="line">    write x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>测试步骤：</p>
+<ol>
+<li>运行主程序</li>
+<li><p>点击选择文件，选中 LCM.txt 文件，点击确定</p>
+</li>
+<li><p>点击符号表</p>
+</li>
+<li>点击词法分析</li>
+<li>点击语法分析</li>
+<li>点击中间代码</li>
+<li>点击目标代码，在弹窗内依次输入 8 和 9</li>
+<li>点击运行结果</li>
+</ol>
+</li>
+<li><p>测试结果：</p>
+<p>略，见测试文档。</p>
+</li>
+</ul>
+<h3 id="No-3"><a href="#No-3" class="headerlink" title="No.3"></a>No.3</h3><ul>
+<li><p>测试目标：测试 for 语句的正确性，包括嵌套 for 语句</p>
+</li>
+<li><p>源程序：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">/* for 循环示例*/</span><br><span class="line"></span><br><span class="line">main&#123;</span><br><span class="line">    int i;</span><br><span class="line">    int j;</span><br><span class="line">    int k;</span><br><span class="line">    for(i = 0; i &lt; 3; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        for(j = 0;j &lt; 3;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            write j;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    for(k = 9; k &gt;= 0; k--)</span><br><span class="line">    &#123;</span><br><span class="line">        write k;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>测试步骤：</p>
+<ol>
+<li>运行主程序</li>
+<li><p>点击选择文件，选中 for.txt 文件，点击确定</p>
+</li>
+<li><p>点击符号表</p>
+</li>
+<li>点击词法分析</li>
+<li>点击语法分析</li>
+<li>点击中间代码</li>
+<li>点击目标代码</li>
+<li>点击运行结果</li>
+</ol>
+</li>
+<li><p>测试结果：</p>
+<p>略，见测试文档。</p>
+</li>
+</ul>
+<h1 id="源码地址"><a href="#源码地址" class="headerlink" title="源码地址"></a>源码地址</h1><p><a target="_blank" rel="noopener" href="https://github.com/10185102110/X0-compiler">https://github.com/10185102110/X0-compiler</a></p>
+<p>文档不便公开。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Ave Bai</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://10185102110.github.io/2021/12/01/X0%E7%BC%96%E8%AF%91%E5%99%A8/">http://10185102110.github.io/2021/12/01/X0%E7%BC%96%E8%AF%91%E5%99%A8/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://10185102110.github.io" target="_blank">浮生孰来</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Java/">Java</a></div><div class="post_share"><div class="social-share" data-image="/img/default/8.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2021/11/26/JUnit/"><img class="next-cover" src="/img/default/5.jpg" onerror="onerror=null;src='/img/default.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">JUnit基础</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2021/08/08/JMM-volatile关键字/" title="JMM&volatile关键字"><img class="cover" src="/img/default/3.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-08-08</div><div class="title">JMM&volatile关键字</div></div></a></div><div><a href="/2021/08/08/JVM垃圾回收机制/" title="JVM垃圾回收机制"><img class="cover" src="/img/default/3.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-08-08</div><div class="title">JVM垃圾回收机制</div></div></a></div><div><a href="/2021/08/08/Java线程安全/" title="Java线程安全"><img class="cover" src="/img/default/4.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-08-08</div><div class="title">Java线程安全</div></div></a></div><div><a href="/2021/08/08/JVM内存结构/" title="JVM内存结构"><img class="cover" src="/img/default/13.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-08-08</div><div class="title">JVM内存结构</div></div></a></div><div><a href="/2021/08/08/Java多线程基础/" title="Java多线程基础"><img class="cover" src="/img/default/5.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-08-08</div><div class="title">Java多线程基础</div></div></a></div><div><a href="/2021/08/08/Java线程池-Executor框架/" title="Java线程池&Executor框架"><img class="cover" src="/img/default/5.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-08-08</div><div class="title">Java线程池&Executor框架</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E8%AF%91%E5%99%A8%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84"><span class="toc-number">1.1.</span> <span class="toc-text">编译器系统结构</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#X0%E8%AF%AD%E8%A8%80%E6%96%87%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">X0语言文法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%B4%E6%98%8E"><span class="toc-number">2.1.</span> <span class="toc-text">说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95%E8%A7%84%E5%88%99"><span class="toc-number">2.2.</span> <span class="toc-text">语法规则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95%E5%9B%BE"><span class="toc-number">2.3.</span> <span class="toc-text">语法图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LL1%E6%96%87%E6%B3%95"><span class="toc-number">2.4.</span> <span class="toc-text">LL1文法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E7%AC%A6%E5%90%88%E4%B8%A4%E6%9D%A1%E9%99%90%E5%88%B6%E8%A7%84%E5%88%99"><span class="toc-number">2.5.</span> <span class="toc-text">判断是否符合两条限制规则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%87%E7%A8%8B%E8%B0%83%E7%94%A8%E7%9B%B8%E5%85%B3%E5%9B%BE"><span class="toc-number">2.6.</span> <span class="toc-text">过程调用相关图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95%E5%87%BA%E9%94%99%E5%AE%9A%E4%B9%89"><span class="toc-number">2.7.</span> <span class="toc-text">语法出错定义</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E6%9C%BA"><span class="toc-number">3.</span> <span class="toc-text">虚拟机</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%84%E7%BB%87%E7%BB%93%E6%9E%84"><span class="toc-number">3.1.</span> <span class="toc-text">组织结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%87%E4%BB%A4%E7%B3%BB%E7%BB%9F%E5%8F%8A%E5%85%B6%E8%A7%A3%E9%87%8A"><span class="toc-number">3.2.</span> <span class="toc-text">指令系统及其解释</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%AD%E9%97%B4%E4%BB%A3%E7%A0%81"><span class="toc-number">3.3.</span> <span class="toc-text">中间代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95"><span class="toc-number">4.</span> <span class="toc-text">测试</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E7%8E%AF%E5%A2%83"><span class="toc-number">4.1.</span> <span class="toc-text">测试环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B"><span class="toc-number">4.2.</span> <span class="toc-text">测试用例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#No-1"><span class="toc-number">4.2.1.</span> <span class="toc-text">No.1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#No-2"><span class="toc-number">4.2.2.</span> <span class="toc-text">No.2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#No-3"><span class="toc-number">4.2.3.</span> <span class="toc-text">No.3</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%BA%90%E7%A0%81%E5%9C%B0%E5%9D%80"><span class="toc-number">5.</span> <span class="toc-text">源码地址</span></a></li></ol></div></div></div></div></main><footer id="footer" style="background-image: url('/img/default/8.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By Ave Bai</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    loader: {
+      source: {
+        '[tex]/amsCd': '[tex]/amscd'
+      }
+    },
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        addClass: [200,() => {
+          document.querySelectorAll('mjx-container:not([display=\'true\']').forEach( node => {
+            const target = node.parentNode
+            if (!target.classList.contains('has-jax')) {
+              target.classList.add('mathjax-overflow')
+            }
+          })
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><script>if (document.getElementsByClassName('mermaid').length) {
+  if (window.mermaidJsLoad) mermaid.init()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(() => {
+      window.mermaidJsLoad = true
+      mermaid.initialize({
+        theme: 'default',
+      })
+      false && mermaid.init()
+    })
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

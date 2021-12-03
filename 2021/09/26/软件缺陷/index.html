@@ -1,0 +1,281 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>软件缺陷 | 浮生孰来</title><meta name="keywords" content="软件测试"><meta name="author" content="Ave Bai"><meta name="copyright" content="Ave Bai"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="[TOC] 定义术语：  软件错误 指在软件生存期内的不希望或不可接受的人为错误，其结果是导致软件缺陷的产生。软件错误是一种人为过程，相对于软件本身是一种外部行为。  软件缺陷 存在于软件之中的那些不希望或不可接受的偏差，结果是软件运行于某一特定条件时出现软件故障，这时称软件缺陷被激活。  软件故障 指软件运行过程中出现的一种不希望或不可接受的内部状态。若没有适当的措施加以处理，便产生软件失效，软">
+<meta property="og:type" content="article">
+<meta property="og:title" content="软件缺陷">
+<meta property="og:url" content="http://10185102110.github.io/2021/09/26/%E8%BD%AF%E4%BB%B6%E7%BC%BA%E9%99%B7/index.html">
+<meta property="og:site_name" content="浮生孰来">
+<meta property="og:description" content="[TOC] 定义术语：  软件错误 指在软件生存期内的不希望或不可接受的人为错误，其结果是导致软件缺陷的产生。软件错误是一种人为过程，相对于软件本身是一种外部行为。  软件缺陷 存在于软件之中的那些不希望或不可接受的偏差，结果是软件运行于某一特定条件时出现软件故障，这时称软件缺陷被激活。  软件故障 指软件运行过程中出现的一种不希望或不可接受的内部状态。若没有适当的措施加以处理，便产生软件失效，软">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://10185102110.github.io/img/default/3.jpg">
+<meta property="article:published_time" content="2021-09-26T13:19:36.000Z">
+<meta property="article:modified_time" content="2021-09-27T13:19:22.780Z">
+<meta property="article:author" content="Ave Bai">
+<meta property="article:tag" content="软件测试">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://10185102110.github.io/img/default/3.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://10185102110.github.io/2021/09/26/%E8%BD%AF%E4%BB%B6%E7%BC%BA%E9%99%B7/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="baidu_site_verification"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?211d055ab9f6b88805047adca6ce783d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '软件缺陷',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-09-27 21:19:22'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><link rel="stylesheet" href="/css/bilibili.css"><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="浮生孰来" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">39</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/picture/"><i class="fa-fw fas fa-camera"></i><span> 图库</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/default/3.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">浮生孰来</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/picture/"><i class="fa-fw fas fa-camera"></i><span> 图库</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">软件缺陷</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-09-26T13:19:36.000Z" title="发表于 2021-09-26 21:19:36">2021-09-26</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-09-27T13:19:22.780Z" title="更新于 2021-09-27 21:19:22">2021-09-27</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/">软件测试</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>5分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="软件缺陷"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>[TOC]</p>
+<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><p>术语：</p>
+<ul>
+<li><p>软件错误</p>
+<p>指在软件生存期内的不希望或不可接受的人为错误，其结果是导致软件缺陷的产生。软件错误是一种人为过程，相对于软件本身是一种外部行为。</p>
+</li>
+<li><p>软件缺陷</p>
+<p>存在于软件之中的那些不希望或不可接受的偏差，结果是软件运行于某一特定条件时出现软件故障，这时称软件缺陷被激活。</p>
+</li>
+<li><p>软件故障</p>
+<p>指软件运行过程中出现的一种不希望或不可接受的内部状态。若没有适当的措施加以处理，便产生软件失效，软件故障是一种动态行为。</p>
+</li>
+<li><p>软件失效</p>
+<p>指软件运行时产生的一种不希望或不可接受的外部行为结果。</p>
+</li>
+</ul>
+<p>软件失效的机理：</p>
+<p>软件错误是一种人为错误，一个软件错误必定产生一个或多个软件缺陷，当一个软件缺陷被激活时便产生一个软件故障；同一个软件缺陷在不同条件下被激活可能产生不同的软件故障。软件故障如果没有及时用容错措施加以处理便不可避免地导致软件失效。</p>
+<h1 id="软件缺陷的属性"><a href="#软件缺陷的属性" class="headerlink" title="软件缺陷的属性"></a>软件缺陷的属性</h1><ul>
+<li><p>缺陷标识（Identifier）：标记某个缺陷的一组符号，每个缺陷必须有一个唯一的标识。</p>
+</li>
+<li><p><strong>缺陷类型</strong>（Type）：一般包括功能缺陷、用户界面缺陷、文档缺陷、软件配置缺陷、性能缺陷、系统/模块接口缺陷等。</p>
+<p>| 缺陷类型编号 |       缺陷类型        |                             描述                             |<br>| :—————: | :—————————-: | :—————————————————————————————: |<br>|      10      |      F-Function       | 影响重要的特性、用户界面、产品接口、硬件结构接口和全局数据结构，并且设计文档需要正式的变更等缺陷 |<br>|      20      |     A-Assignment      | 需要修改少量代码，如初始化或控制块，声明、重复命名，范围、限定等缺陷 |<br>|      30      |      I-Interface      | 与其他组件、模块或设备驱动程序、调用参数、控制块或参数列表相互影响的缺陷 |<br>|      40      |      C-Checking       |            提示的错误信息，不适当的数据验证等缺陷            |<br>|      50      | B Build/package/merge |           由于配置库、变更管理或版本控制引起的错误           |<br>|      60      |    D-Documentation    |                   影响发布和维护，包括注释                   |<br>|      70      |      G-Algorithm      |                           算法错误                           |<br>|      80      |   U-User Interface    | 人机交互特性：屏幕格式、确认用户输入、功能有效性、页面排版等缺陷 |<br>|      90      |     P-Performance     |     不满足系统可测量的属性值，如执行时间、事务处理速率等     |<br>|     100      |        N-Norms        |         不符合各种标准的要求，如编码标准、设计符号等         |</p>
+</li>
+<li><p>缺陷严重程度（Severity）：指因缺陷引起的故障对软件产品的影响程度。</p>
+<p>|  #   | 缺陷严重等级 |                             描述                             |<br>| :—: | :—————: | :—————————————————————————————: |<br>|  1   |   Critical   |       不能执行正常工作功能或重要功能，或者危及人身安全       |<br>|  2   |    Major     |         严重影响系统要求或基本功能的实现，且无法更正         |<br>|  3   |    Minor     | 严重影响系统要求或基本功能的实现，但存在合理的更正方法（重新安装或重新启动该软件不属于更正方法） |<br>|  4   |   Cosmetic   |  使操作者不方便或遇到麻烦，但它不影响执行工作功能或重要功能  |<br>|  5   |    Other     |                           其他错误                           |</p>
+</li>
+<li><p>缺陷优先级（Priority）：指缺陷必须被修复的紧急程度。</p>
+<p>|  #   |     缺陷优先级      |        描述        |<br>| :—: | :————————-: | :————————: |<br>|  1   | Resolve Immediately |    必须立即解决    |<br>|  2   |    Normal Queue     |  需要排队等待修复  |<br>|  3   |     Not Urgent      | 可以在方便时被纠正 |</p>
+</li>
+<li><p>缺陷状态（Status）：指缺陷通过一个跟踪修复过程的进展情况。</p>
+<p>| 缺陷状态  |             描述             |<br>| :———-: | :—————————————: |<br>| Submitted |         已提交的缺陷         |<br>|   Open    |  确认“提交的缺陷”，等待处理  |<br>| Rejected  | 拒绝“提交的缺陷”，不需要修复 |<br>| Resolved  |          缺陷被修复          |<br>|  Closed   |  确认被修复的缺陷，将其关闭  |</p>
+</li>
+<li><p>缺陷起源（Origin）：指缺陷引起的故障第一次被检测到的阶段。</p>
+<p>|   缺陷起源   |         描述         |<br>| :—————: | :—————————: |<br>| Requirement  | 在需求阶段发现的缺陷 |<br>| Architecture | 在构架阶段发现的缺陷 |<br>|    Design    | 在设计阶段发现的缺陷 |<br>|     Code     | 在编码阶段发现的缺陷 |<br>|     Test     | 在测试阶段发现的缺陷 |</p>
+</li>
+<li><p>缺陷来源（Source）：指引起缺陷的起因。</p>
+<p>|   缺陷来源   |          描述          |<br>| :—————: | :——————————: |<br>| Requirement  | 由于需求问题引起的缺陷 |<br>| Architecture | 由于构架问题引起的缺陷 |<br>|    Design    | 由于设计问题引起的缺陷 |<br>|     Code     | 由于编码问题引起的缺陷 |<br>|     Test     | 由于测试问题引起的缺陷 |<br>| Integration  | 由于集成问题引起的缺陷 |</p>
+</li>
+<li><p>缺陷根源（Root Cause）：指发生错误的根本因素。</p>
+</li>
+</ul>
+<h1 id="缺陷六要素"><a href="#缺陷六要素" class="headerlink" title="缺陷六要素"></a>缺陷六要素</h1><ul>
+<li>缺陷标识</li>
+<li>缺陷名称</li>
+<li>缺陷优先级</li>
+<li>缺陷严重程度</li>
+<li>缺陷的复现步骤：用例的步骤、预期结果、实际结果。</li>
+<li>附件：截图/日志/视频，目的是为缺陷佐证。</li>
+</ul>
+<h1 id="缺陷生命周期"><a href="#缺陷生命周期" class="headerlink" title="缺陷生命周期"></a>缺陷生命周期</h1><p>基本的软件缺陷生命周期：</p>
+<p>发现缺陷$\rightarrow$分配缺陷$\rightarrow$修复缺陷$\rightarrow$验证缺陷$\rightarrow$解决缺陷</p>
+<p>软件的状态在其生命周期中的变化如下：</p>
+<p>（1）创建（Open）：缺陷从隐藏在产品中被发现。</p>
+<p>（2）已分配（Assigned）：得到缺陷修复请求后，将修复任务分配给相应的开发人员进行修复。</p>
+<p>（3）已修复（Fixed）：开发人员根据缺陷的描述重现缺陷的症状、修复缺陷，然后提交给测试人员验证修改。</p>
+<p>（4）验证（Validate）：测试人员验证修改的有效性，若修正得到确认，缺陷状态变为“已确认”。</p>
+<p>（5）关闭（Close）：测试人员关闭这个缺陷，结束其生命周期。</p>
+<p>实践中的软件缺陷生命周期：</p>
+<p><img src="0.png" alt=""></p>
+<h1 id="IEEE-软件缺陷报告模板"><a href="#IEEE-软件缺陷报告模板" class="headerlink" title="IEEE 软件缺陷报告模板"></a>IEEE 软件缺陷报告模板</h1><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="code">        IEEE 829-1998 软件测试文档编制标准软件缺陷报告模板</span></span><br><span class="line"><span class="code">                           目录</span></span><br><span class="line"><span class="code">1.软件缺陷报告标识符</span></span><br><span class="line"><span class="code">2.软件缺陷总结</span></span><br><span class="line"><span class="code">3.软件缺陷描述</span></span><br><span class="line"><span class="code">  3.1  输入</span></span><br><span class="line"><span class="code">  3.2  期望结果</span></span><br><span class="line"><span class="code">  3.3  实际结果</span></span><br><span class="line"><span class="code">  3.4  异常情况</span></span><br><span class="line"><span class="code">  3.5  日期和时间</span></span><br><span class="line"><span class="code">  3.6  软件缺陷发生的步骤</span></span><br><span class="line"><span class="code">  3.7  测试环境</span></span><br><span class="line"><span class="code">  3.8  再现测试</span></span><br><span class="line"><span class="code">  3.9  测试人员</span></span><br><span class="line"><span class="code">  3.10 见证人</span></span><br><span class="line"><span class="code">4.影响</span></span><br></pre></td></tr></table></figure>
+<p><strong>参考资料：</strong></p>
+<p>[1] 秦航，杨强 . 软件质量保证与测试(第 2 版)[M] . 北京：清华大学出版社，2017</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Ave Bai</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://10185102110.github.io/2021/09/26/%E8%BD%AF%E4%BB%B6%E7%BC%BA%E9%99%B7/">http://10185102110.github.io/2021/09/26/%E8%BD%AF%E4%BB%B6%E7%BC%BA%E9%99%B7/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://10185102110.github.io" target="_blank">浮生孰来</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/">软件测试</a></div><div class="post_share"><div class="social-share" data-image="/img/default/3.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/09/27/%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95/"><img class="prev-cover" src="/img/default/12.jpg" onerror="onerror=null;src='/img/default.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">集成测试</div></div></a></div><div class="next-post pull-right"><a href="/2021/09/23/%E9%AB%98%E8%B4%A8%E9%87%8F%E4%BB%A3%E7%A0%81/"><img class="next-cover" src="/img/default/12.jpg" onerror="onerror=null;src='/img/default.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">高质量代码</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2021/10/26/JMeter 实践/" title="JMeter实践"><img class="cover" src="/img/default/5.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-10-26</div><div class="title">JMeter实践</div></div></a></div><div><a href="/2021/10/20/fiddler抓包/" title="Fiddler抓包"><img class="cover" src="/img/default/12.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-10-20</div><div class="title">Fiddler抓包</div></div></a></div><div><a href="/2021/11/04/pytest 测试框架/" title="pytest 测试框架"><img class="cover" src="/img/default/8.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-11-04</div><div class="title">pytest 测试框架</div></div></a></div><div><a href="/2021/09/21/白盒测试/" title="白盒测试"><img class="cover" src="/img/default/5.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-09-21</div><div class="title">白盒测试</div></div></a></div><div><a href="/2021/09/28/系统测试/" title="系统测试"><img class="cover" src="/img/default/3.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-09-28</div><div class="title">系统测试</div></div></a></div><div><a href="/2021/09/27/集成测试/" title="集成测试"><img class="cover" src="/img/default/12.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-09-27</div><div class="title">集成测试</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-number">1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BD%AF%E4%BB%B6%E7%BC%BA%E9%99%B7%E7%9A%84%E5%B1%9E%E6%80%A7"><span class="toc-number">2.</span> <span class="toc-text">软件缺陷的属性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BC%BA%E9%99%B7%E5%85%AD%E8%A6%81%E7%B4%A0"><span class="toc-number">3.</span> <span class="toc-text">缺陷六要素</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BC%BA%E9%99%B7%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-number">4.</span> <span class="toc-text">缺陷生命周期</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#IEEE-%E8%BD%AF%E4%BB%B6%E7%BC%BA%E9%99%B7%E6%8A%A5%E5%91%8A%E6%A8%A1%E6%9D%BF"><span class="toc-number">5.</span> <span class="toc-text">IEEE 软件缺陷报告模板</span></a></li></ol></div></div></div></div></main><footer id="footer" style="background-image: url('/img/default/3.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By Ave Bai</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    loader: {
+      source: {
+        '[tex]/amsCd': '[tex]/amscd'
+      }
+    },
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        addClass: [200,() => {
+          document.querySelectorAll('mjx-container:not([display=\'true\']').forEach( node => {
+            const target = node.parentNode
+            if (!target.classList.contains('has-jax')) {
+              target.classList.add('mathjax-overflow')
+            }
+          })
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><script>if (document.getElementsByClassName('mermaid').length) {
+  if (window.mermaidJsLoad) mermaid.init()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(() => {
+      window.mermaidJsLoad = true
+      mermaid.initialize({
+        theme: 'default',
+      })
+      false && mermaid.init()
+    })
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
