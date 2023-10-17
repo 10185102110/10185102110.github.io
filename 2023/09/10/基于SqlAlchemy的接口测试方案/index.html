@@ -1,0 +1,424 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>基于SqlAlchemy的接口测试方案 | 浮生孰来</title><meta name="keywords" content="软件测试"><meta name="author" content="Ave Bai"><meta name="copyright" content="Ave Bai"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="[TOC] 一、概述​        SQLAlchemy 是一个基于 Python 实现的对象关系映射（Object Relational Mapping，ORM）框架，该框架建立在 Python DB API 之上，使用关系对象映射进行数据库操作。简单来说，就是不需要去写原生的 sql 语句，只需要用 python 语法来操作对象就能自动映射为 sql 语句。 ​        官方文档：SQ">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于SqlAlchemy的接口测试方案">
+<meta property="og:url" content="http://10185102110.github.io/2023/09/10/%E5%9F%BA%E4%BA%8ESqlAlchemy%E7%9A%84%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95%E6%96%B9%E6%A1%88/index.html">
+<meta property="og:site_name" content="浮生孰来">
+<meta property="og:description" content="[TOC] 一、概述​        SQLAlchemy 是一个基于 Python 实现的对象关系映射（Object Relational Mapping，ORM）框架，该框架建立在 Python DB API 之上，使用关系对象映射进行数据库操作。简单来说，就是不需要去写原生的 sql 语句，只需要用 python 语法来操作对象就能自动映射为 sql 语句。 ​        官方文档：SQ">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://10185102110.github.io/img/default/14.jpg">
+<meta property="article:published_time" content="2023-09-10T11:16:36.000Z">
+<meta property="article:modified_time" content="2023-10-17T12:41:22.447Z">
+<meta property="article:author" content="Ave Bai">
+<meta property="article:tag" content="软件测试">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://10185102110.github.io/img/default/14.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://10185102110.github.io/2023/09/10/%E5%9F%BA%E4%BA%8ESqlAlchemy%E7%9A%84%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95%E6%96%B9%E6%A1%88/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="baidu_site_verification"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?211d055ab9f6b88805047adca6ce783d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '基于SqlAlchemy的接口测试方案',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-10-17 20:41:22'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><link rel="stylesheet" href="/css/bilibili.css"><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="浮生孰来" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">44</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/picture/"><i class="fa-fw fas fa-camera"></i><span> 图库</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/default/14.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">浮生孰来</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/picture/"><i class="fa-fw fas fa-camera"></i><span> 图库</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">基于SqlAlchemy的接口测试方案</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-09-10T11:16:36.000Z" title="发表于 2023-09-10 19:16:36">2023-09-10</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-10-17T12:41:22.447Z" title="更新于 2023-10-17 20:41:22">2023-10-17</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/">软件测试</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.9k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>11分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="基于SqlAlchemy的接口测试方案"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>[TOC]</p>
+<h1 id="一、概述"><a href="#一、概述" class="headerlink" title="一、概述"></a>一、概述</h1><p>​        SQLAlchemy 是一个基于 Python 实现的对象关系映射（Object Relational Mapping，ORM）框架，该框架建立在 Python DB API 之上，使用关系对象映射进行数据库操作。简单来说，就是不需要去写原生的 sql 语句，只需要用 python 语法来操作对象就能自动映射为 sql 语句。</p>
+<p>​        官方文档：<a target="_blank" rel="noopener" href="https://www.sqlalchemy.org/">SQLAlchemy - The Database Toolkit for Python</a></p>
+<p>​        SQLAlchemy 本身无法操作数据库，其必须使用第三方插件，通过 Dialect 和数据库交互，然后 Dialect 根据配置去调用指定的数据库 API 从而实现对数据库的操作。</p>
+<p><img src="sqlalchemy-1.png" alt="sqlalchemy-1"></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>术语</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Schema/Types</td>
+<td>表到类之间的映射规则</td>
+</tr>
+<tr>
+<td>SQL Expression</td>
+<td>sql语句</td>
+</tr>
+<tr>
+<td>Engine</td>
+<td>引擎</td>
+</tr>
+<tr>
+<td>Connection Pooling</td>
+<td>连接池</td>
+</tr>
+<tr>
+<td>Dialect</td>
+<td>数据库方言</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h1 id="二、安装"><a href="#二、安装" class="headerlink" title="二、安装"></a>二、安装</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip install sqlalchemy</span><br><span class="line">pip install Flask-SQLAlchemy</span><br></pre></td></tr></table></figure>
+<h1 id="三、数据库连接"><a href="#三、数据库连接" class="headerlink" title="三、数据库连接"></a>三、数据库连接</h1><p>Engine 是 SQLAlchemy 的开始，首先通过 <code>create_engine(URL)</code> 创建一个引擎，</p>
+<p>URL 的格式为  <code>dialect[+driver]://user:password@host/dbname[?key=value..]</code></p>
+<p>即 <strong>数据库方言+驱动://用户名:密码@主机:端口/数据库名称</strong></p>
+<p>不同数据库常用的创建方式如下：</p>
+<h2 id="1-PostgreSQL"><a href="#1-PostgreSQL" class="headerlink" title="1. PostgreSQL"></a>1. PostgreSQL</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sqlalchemy <span class="keyword">import</span> create_engine</span><br><span class="line"><span class="comment"># default</span></span><br><span class="line">engine = create_engine(<span class="string">&#x27;postgresql://username:password@host:port/database&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># psycopg2</span></span><br><span class="line">engine = create_engine(<span class="string">&#x27;postgresql+psycopg2://username:password@host:port/database&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 人大金仓,需下载方言包</span></span><br><span class="line">engine = create_engine(<span class="string">&#x27;kingbase+psycopg2://username:password@host:port/database&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>人大金仓的 Sqlalchemy 方言包下载地址：</p>
+<p><a target="_blank" rel="noopener" href="https://gitee.com/LFunTech/sqlalchemy_kingbase/tree/master">sqlalchemy_kingbase - 码云 - 开源中国 (gitee.com)</a></p>
+<p>将 sqlalchemy_kingbase 文件夹放到 python 安装目录中的 Python(版本号)\Lib\site-packages\sqlalchemy\dialects，并改名为 kingbase，测试代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sqlalchemy <span class="keyword">import</span> create_engine</span><br><span class="line">engine = create_engine(<span class="string">&#x27;kingbase+psycopg2://%s:%s@%s:%s/%s&#x27;</span></span><br><span class="line">            % (<span class="string">&quot;用户名&quot;</span>, <span class="string">&quot;密码&quot;</span>, <span class="string">&quot;host&quot;</span>, <span class="string">&quot;port&quot;</span>, <span class="string">&quot;数据库名称&quot;</span>))</span><br><span class="line">conn = engine.connect()</span><br><span class="line">conn.close()</span><br></pre></td></tr></table></figure>
+<h2 id="2-MySQL"><a href="#2-MySQL" class="headerlink" title="2. MySQL"></a>2. MySQL</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sqlalchemy <span class="keyword">import</span> create_engine</span><br><span class="line"><span class="comment"># default</span></span><br><span class="line">engine = create_engine(<span class="string">&#x27;mysql://username:password@host:port/database&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># PyMySQL</span></span><br><span class="line">engine = create_engine(<span class="string">&#x27;mysql+pymysql://username:password@host:port/database&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="3-Oracle"><a href="#3-Oracle" class="headerlink" title="3. Oracle"></a>3. Oracle</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">engine = create_engine(<span class="string">&#x27;oracle://username:password@host:port/database&#x27;</span>)</span><br><span class="line"></span><br><span class="line">engine = create_engine(<span class="string">&#x27;oracle+cx_oracle://username:password@host:port/database&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h1 id="四、声明映射"><a href="#四、声明映射" class="headerlink" title="四、声明映射"></a>四、声明映射</h1><p>我们的目的是在 Python 中创建的一个类可以对应数据库中的一张表，类的每个属性就是这个表的字段名。这种对应数据库中表的类，称为<strong>映射类</strong>。映射类是基于映射基类定义的，每个映射类都要继承基类<code>declarative_base()</code>。</p>
+<p>以下是一个模型定义的示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"><span class="keyword">from</span> sqlalchemy.ext.declarative <span class="keyword">import</span> declarative_base</span><br><span class="line"><span class="keyword">from</span> sqlalchemy <span class="keyword">import</span> Column, Integer, String, DateTime</span><br><span class="line"></span><br><span class="line">Base = declarative_base()  <span class="comment"># 映射基类</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span>(<span class="params">Base</span>):</span>  <span class="comment"># 定义映射类,继承基类,相当于数据库的一张表</span></span><br><span class="line">    __tablename__ = <span class="string">&quot;auth_user&quot;</span>  <span class="comment"># 定义表的名字</span></span><br><span class="line">    __table_args__ = &#123;<span class="string">&#x27;comment&#x27;</span>: <span class="string">&#x27;用户信息表&#x27;</span>&#125;  <span class="comment"># 添加注释</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Column，相当于表中的一个字段，内部定义数据类型</span></span><br><span class="line">    <span class="built_in">id</span> = Column(Integer, primary_key=<span class="literal">True</span>)  <span class="comment"># primary_key：主键</span></span><br><span class="line">    username = Column(String(length=<span class="number">30</span>))</span><br><span class="line">    password = Column(String(length=<span class="number">128</span>))</span><br></pre></td></tr></table></figure>
+<p>通过定义 User 类，我们有了用户表的信息，这被称为表的元数据，该表在数据库中可能并不存在。</p>
+<p>映射定义完成后，可以创建映射类的实例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">user = User(username=<span class="string">&#x27;admin&#x27;</span>, password=<span class="string">&#x27;123456&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(user.name)</span><br></pre></td></tr></table></figure>
+<p>此时，实例对象只在运行环境中生效，并没有在数据库表中产生真正的数据。</p>
+<p><code>create_engine(URL)</code> 连接数据库之后，可以创建表：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Base.metadata.create_all(engine)</span><br></pre></td></tr></table></figure>
+<p><code>create_all(engine)</code> 将在连接的数据库中，为所有映射类创建真正的数据库表结构。</p>
+<h1 id="五、反射（测试）"><a href="#五、反射（测试）" class="headerlink" title="五、反射（测试）"></a>五、反射（测试）</h1><p>以普遍理性而言，声明映射通常是后端开发采用的策略，在测试环节，我们不需要自己定义表结构，而是希望直接将现成的数据库表反射为 Python 对象。</p>
+<p>以下为反射示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sqlalchemy.ext.automap <span class="keyword">import</span> automap_base</span><br><span class="line"><span class="keyword">from</span> sqlalchemy.orm <span class="keyword">import</span> sessionmaker</span><br><span class="line"><span class="keyword">from</span> sqlalchemy <span class="keyword">import</span> create_engine</span><br><span class="line"></span><br><span class="line">Base = automap_base()  <span class="comment"># 定义反射基类</span></span><br><span class="line"></span><br><span class="line">engine = create_engine(<span class="string">&quot;sqlite:///mydatabase.db&quot;</span>)  <span class="comment"># 创建引擎</span></span><br><span class="line"></span><br><span class="line">Base.prepare(autoload_with=engine)  <span class="comment"># 反射数据库表</span></span><br><span class="line">tables = Base.classes  <span class="comment"># 获取所有表</span></span><br><span class="line"></span><br><span class="line">User = Base.classes.user  <span class="comment"># 将数据库中名为user的表反射为我们的User类，注意我们不需要定义User类</span></span><br><span class="line"></span><br><span class="line">Session = sessionmaker(bind=engine)  <span class="comment"># 创建会话，使用引擎连接资源</span></span><br><span class="line">session = Session()  <span class="comment"># 会话实例化，负责所有对象的加载和保存</span></span><br><span class="line">session.add(User(username=<span class="string">&#x27;admin&#x27;</span>, password=<span class="string">&#x27;123456&#x27;</span>))  <span class="comment"># 新增一条数据</span></span><br><span class="line">session.commit()  <span class="comment"># 提交事务</span></span><br></pre></td></tr></table></figure>
+<p>将数据库表反射为映射类后，我们就可以面向对象操作，从而取代原生 sql。</p>
+<h1 id="六、SQLAlchemy-关键字"><a href="#六、SQLAlchemy-关键字" class="headerlink" title="六、SQLAlchemy 关键字"></a>六、SQLAlchemy 关键字</h1><p>下面总结一些关键字，用来表达 sql 语句。</p>
+<ol>
+<li>新增记录</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">user = User(username=<span class="string">&#x27;admin&#x27;</span>, password=<span class="string">&#x27;123456&#x27;</span>)</span><br><span class="line">session.add(user)</span><br></pre></td></tr></table></figure>
+<ol>
+<li>批量新增记录</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">user1 = User(username=<span class="string">&#x27;admin1&#x27;</span>, password=<span class="string">&#x27;123456&#x27;</span>)</span><br><span class="line">user2 = User(username=<span class="string">&#x27;admin2&#x27;</span>, password=<span class="string">&#x27;123456&#x27;</span>)</span><br><span class="line">session.add_all(user1, user2)</span><br></pre></td></tr></table></figure>
+<ol>
+<li>更新记录</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">schedule = session.query(Schedule).filter_by(scd_id=<span class="string">&#x27;xxx&#x27;</span>)</span><br><span class="line">schedule.update(&#123;<span class="string">&quot;scd_iton&quot;</span>: <span class="string">&quot;1000&quot;</span>&#125;)</span><br></pre></td></tr></table></figure>
+<ol>
+<li>删除记录</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">schedule.delete()</span><br></pre></td></tr></table></figure>
+<ol>
+<li>提交事务</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">schedule.delete()</span><br></pre></td></tr></table></figure>
+<ol>
+<li>回滚事务</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">session.rollback()</span><br></pre></td></tr></table></figure>
+<ol>
+<li>查询记录</li>
+</ol>
+<p>通过 <strong>query</strong> 关键字查询：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">query = session.query(User)  <span class="comment"># 返回全部字段</span></span><br><span class="line">query = session.query(User.username, User.password)  <span class="comment"># 指定返回字段</span></span><br></pre></td></tr></table></figure>
+<p><strong>query</strong> 表达式可以接关键字，关键字后又可以接关键字，但执行查询后不可以继续接关键字：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th><strong>关键字</strong></th>
+<th><strong>描述</strong></th>
+<th><strong>参数格式</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>query.filter()</td>
+<td>过滤，相当于where</td>
+<td>username = “asd”</td>
+</tr>
+<tr>
+<td>query.filter_by()</td>
+<td>同上</td>
+<td>User.username == “asd”</td>
+</tr>
+<tr>
+<td>query.group_by()</td>
+<td>分组，相当于group by</td>
+<td>User.username</td>
+</tr>
+<tr>
+<td>query.order_by()</td>
+<td>排序，相当于order by</td>
+<td>User.username [.desc()]</td>
+</tr>
+<tr>
+<td>query.having()</td>
+<td>分组过滤，相当于having</td>
+<td>User.username.in_([‘admin’, ‘asd’])</td>
+</tr>
+<tr>
+<td>query.all()</td>
+<td>执行查询，返回所有符合条件的记录</td>
+<td>无</td>
+</tr>
+<tr>
+<td>query.first()</td>
+<td>执行查询，返回第一个符合条件的记录</td>
+<td>无</td>
+</tr>
+<tr>
+<td>query.one()</td>
+<td>执行查询，返回唯一记录，不唯一报错</td>
+<td>无</td>
+</tr>
+<tr>
+<td>query.scalar()</td>
+<td>执行查询，返回唯一记录，不唯一返回None</td>
+<td>无</td>
+</tr>
+<tr>
+<td>query.join()</td>
+<td>两表连接</td>
+<td>Voyage, Voyage.voy_scd_id == Schedule.scd_id</td>
+</tr>
+<tr>
+<td>column.label()</td>
+<td>重命名字段</td>
+<td>无</td>
+</tr>
+<tr>
+<td>aliased()</td>
+<td>为查询出的记录设置别名</td>
+<td>User, name=’user_alias’</td>
+</tr>
+<tr>
+<td>query.limit()</td>
+<td>设置终止索引，需要搭配all()</td>
+<td>1</td>
+</tr>
+<tr>
+<td>query.offset()</td>
+<td>设置起始索引，需要搭配all()</td>
+<td>1</td>
+</tr>
+<tr>
+<td>query.slice()</td>
+<td>设置切片，需要搭配all()</td>
+<td>1，10</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>union &amp; union all</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># union之前的各字段必须使用filter()，且不触发查询</span></span><br><span class="line">user_name = session.query(User.username).<span class="built_in">filter</span>()</span><br><span class="line">user_password = session.query(User.password).<span class="built_in">filter</span>()</span><br><span class="line">result = user_name.union_all(user_password).<span class="built_in">all</span>()</span><br></pre></td></tr></table></figure>
+<p>常用筛选器运算符：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 等于</span></span><br><span class="line">query.<span class="built_in">filter</span>(User.username == <span class="string">&#x27;ed&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 不等于</span></span><br><span class="line">query.<span class="built_in">filter</span>(User.username != <span class="string">&#x27;ed&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 通配符</span></span><br><span class="line">query.<span class="built_in">filter</span>(User.username.like(<span class="string">&#x27;%ed%&#x27;</span>))</span><br><span class="line">query.<span class="built_in">filter</span>(User.username.ilike(<span class="string">&#x27;%ed%&#x27;</span>)) <span class="comment"># 不区分大小写</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># between in </span></span><br><span class="line">query.<span class="built_in">filter</span>(User.<span class="built_in">id</span>.between(<span class="number">1</span>, <span class="number">3</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># in</span></span><br><span class="line">query.<span class="built_in">filter</span>(User.username.in_([<span class="string">&#x27;ed&#x27;</span>, <span class="string">&#x27;wendy&#x27;</span>, <span class="string">&#x27;jack&#x27;</span>]))</span><br><span class="line">query.<span class="built_in">filter</span>(User.username.in_(</span><br><span class="line">    session.query(User.username).<span class="built_in">filter</span>(User.username.like(<span class="string">&#x27;%ed%&#x27;</span>))</span><br><span class="line">))</span><br><span class="line"><span class="comment"># not in</span></span><br><span class="line">query.<span class="built_in">filter</span>(~User.username.in_([<span class="string">&#x27;ed&#x27;</span>, <span class="string">&#x27;wendy&#x27;</span>, <span class="string">&#x27;jack&#x27;</span>])) </span><br><span class="line"></span><br><span class="line"><span class="comment"># is</span></span><br><span class="line">query.<span class="built_in">filter</span>(User.username == <span class="literal">None</span>)</span><br><span class="line">query.<span class="built_in">filter</span>(User.username.is_(<span class="literal">None</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># is not</span></span><br><span class="line">query.<span class="built_in">filter</span>(User.username != <span class="literal">None</span>)</span><br><span class="line">query.<span class="built_in">filter</span>(User.username.is_not(<span class="literal">None</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># and</span></span><br><span class="line"><span class="keyword">from</span> sqlalchemy <span class="keyword">import</span> and_</span><br><span class="line">query.<span class="built_in">filter</span>(and_(User.username == <span class="string">&#x27;ed&#x27;</span>, User.password == <span class="string">&#x27;Ed Jones&#x27;</span>))</span><br><span class="line">query.<span class="built_in">filter</span>(User.username == <span class="string">&#x27;ed&#x27;</span>, User.password == <span class="string">&#x27;Ed Jones&#x27;</span>)</span><br><span class="line">query.<span class="built_in">filter</span>(User.username == <span class="string">&#x27;ed&#x27;</span>).<span class="built_in">filter</span>(User.password == <span class="string">&#x27;Ed Jones&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># or</span></span><br><span class="line"><span class="keyword">from</span> sqlalchemy <span class="keyword">import</span> or_</span><br><span class="line">query.<span class="built_in">filter</span>(or_(User.username == <span class="string">&#x27;ed&#x27;</span>, User.username == <span class="string">&#x27;wendy&#x27;</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># match</span></span><br><span class="line">query.<span class="built_in">filter</span>(User.username.match(<span class="string">&#x27;wendy&#x27;</span>))</span><br></pre></td></tr></table></figure>
+<p>聚合函数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sqlalchemy <span class="keyword">import</span> func</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计数</span></span><br><span class="line">session.query(func.count(User.username)).<span class="built_in">all</span>()</span><br><span class="line"><span class="comment"># 求和</span></span><br><span class="line">session.query(func.<span class="built_in">sum</span>(User.age)).<span class="built_in">all</span>()</span><br><span class="line"><span class="comment"># 最大值</span></span><br><span class="line">session.query(func.<span class="built_in">max</span>(User.age)).<span class="built_in">all</span>()</span><br><span class="line"><span class="comment"># 最小值</span></span><br><span class="line">session.query(func.<span class="built_in">min</span>(User.age)).<span class="built_in">all</span>()</span><br><span class="line"><span class="comment"># 平均值</span></span><br><span class="line">session.query(func.avg(User.age)).<span class="built_in">all</span>()</span><br></pre></td></tr></table></figure>
+<h1 id="七、框架演示"><a href="#七、框架演示" class="headerlink" title="七、框架演示"></a>七、框架演示</h1><p>源码地址：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/10185102110/my-sqlalchemy/blob/main/database.py">my-sqlalchemy/database.py at main · 10185102110/my-sqlalchemy (github.com)</a></p>
+<p>XX系统数据库操作示例（多行注释为等价 sql 语句）：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> base.database <span class="keyword">import</span> BaseModel</span><br><span class="line"><span class="keyword">from</span> sqlalchemy <span class="keyword">import</span> func</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义数据库连接信息</span></span><br><span class="line">database = &#123;</span><br><span class="line">    <span class="string">&quot;dialect&quot;</span>: <span class="string">&quot;kingbase&quot;</span>,</span><br><span class="line">    <span class="string">&quot;driver&quot;</span>: <span class="string">&quot;psycopg2&quot;</span>,</span><br><span class="line">    <span class="string">&quot;username&quot;</span>: <span class="string">&quot;admin&quot;</span>,</span><br><span class="line">    <span class="string">&quot;password&quot;</span>: <span class="string">&quot;123456&quot;</span>,</span><br><span class="line">    <span class="string">&quot;host&quot;</span>: <span class="string">&quot;10.166.0.xxx&quot;</span>,</span><br><span class="line">    <span class="string">&quot;port&quot;</span>: <span class="string">&quot;54321&quot;</span>,</span><br><span class="line">    <span class="string">&quot;database&quot;</span>: <span class="string">&quot;btopsdb&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">orm = BaseModel(conn=database)  <span class="comment"># 获取ORM实例</span></span><br><span class="line"><span class="built_in">print</span>(orm.get_schemas())  <span class="comment"># 获取该连接的所有数据库名</span></span><br><span class="line"><span class="built_in">print</span>(orm.get_tables(<span class="string">&#x27;btops&#x27;</span>))  <span class="comment"># 获取数据库btops下的所有表名</span></span><br><span class="line"></span><br><span class="line">Schedule = orm.tables.bps_schedule  <span class="comment"># 反射船期</span></span><br><span class="line">Voyage = orm.tables.bps_voyage  <span class="comment"># 反射航次</span></span><br><span class="line"></span><br><span class="line">result1 = orm.select(Schedule).first()</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">SELECT * </span></span><br><span class="line"><span class="string">FROM bps_schedule </span></span><br><span class="line"><span class="string">LIMIT 1</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">result2 = orm.select(Schedule.scd_id).filter_by(scd_vsl_cd=<span class="string">&#x27;TIAN ZHEN&#x27;</span>).order_by(Schedule.scd_id.desc()).<span class="built_in">all</span>()</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">SELECT scd_id </span></span><br><span class="line"><span class="string">FROM bps_schedule </span></span><br><span class="line"><span class="string">WHERE scd_vsl_cd=&#x27;TIAN ZHEN&#x27; </span></span><br><span class="line"><span class="string">ORDER BY scd_id desc</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">result3 = orm.select(Voyage.voy_iefg, func.count(<span class="number">1</span>).label(<span class="string">&quot;count&quot;</span>)).group_by(Voyage.voy_iefg).having(Voyage.voy_iefg.in_([<span class="string">&#x27;I&#x27;</span>, <span class="string">&#x27;E&#x27;</span>])).<span class="built_in">all</span>()</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">SELECT voy_iefg AS voy_iefg, count(1) AS count </span></span><br><span class="line"><span class="string">FROM bps_voyage </span></span><br><span class="line"><span class="string">GROUP BY voy_iefg </span></span><br><span class="line"><span class="string">HAVING voy_iefg IN (&#x27;I&#x27;, &#x27;E&#x27;)</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">result4 = orm.select(Schedule).join(Voyage, Voyage.voy_scd_id == Schedule.scd_id).add_columns(Voyage).<span class="built_in">filter</span>(Voyage.voy_trade == <span class="string">&#x27;W&#x27;</span>).<span class="built_in">all</span>()</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">SELECT *</span></span><br><span class="line"><span class="string">FROM bps_schedule</span></span><br><span class="line"><span class="string">JOIN bps_voyage ON bps_schedule.scd_id = bps_voyage.voy_scd_id</span></span><br><span class="line"><span class="string">WHERE bps_voyage.voy_trade = &#x27;W&#x27;</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line">d = orm.to_dict(result4)  <span class="comment"># 将查询结果转换为字典格式</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> orm.auto_commit():  <span class="comment"># 自动提交事务，适用于增删改</span></span><br><span class="line">    orm.select(Schedule).filter_by(scd_id=<span class="string">&#x27;136a53c2c7bfd5c6c0e799b07312d4f2&#x27;</span>).update(&#123;<span class="string">&quot;scd_iton&quot;</span>: <span class="string">&quot;1000&quot;</span>&#125;)</span><br></pre></td></tr></table></figure>
+<h1 id="八、接口自动化测试"><a href="#八、接口自动化测试" class="headerlink" title="八、接口自动化测试"></a>八、接口自动化测试</h1><p>数据库校验是接口自动化测试必不可少的一块拼图，那么如何将数据库校验融入到接口测试中呢？</p>
+<p>如果要验证某个接口的执行结果或者返回结果是否正确，首先我们会想到校验请求的状态码，通常 200 代表请求正常、401 代表认证失败、500 代表后端错误等等；但是 200 仅仅代表没有报错，无法保证业务逻辑的正确性，500 也不代表服务异常，它可能是后端进行的错误处理。</p>
+<p>为了更精确地判断接口是否按照预期执行，可以通过响应体中的data部分进行一些字段的正确性校验。</p>
+<p>然而，不是所有接口都会返回data，确切地说，可能返回的是data=true，然后没有了。</p>
+<p>进一步，我们可以通过编写 sql 语句来应对接口不返回业务数据的情况：</p>
+<ul>
+<li>对于一个 get 请求，我们希望验证响应结果的数据量或者某条数据的正确性；</li>
+<li>对于一个 post 新增请求，我们希望验证写入数据库的真实数据的正确性、是否存在漏写等问题；</li>
+<li>对于一个 put/post 修改请求，我们希望验证修改的数据在数据库中是否正确变更；</li>
+<li>对于一个 delete/post 删除请求，我们希望验证某条数据是否真正在数据库中被抹除，或是由于修改状态标记而被隐藏。</li>
+</ul>
+<p>考虑到实际应用，如果需要编写大量 sql 语句，且研发迭代的过程中数据库表结构会发生更改，原生 sql 的维护实在称不上优雅，随着自动化用例的规模增长，我们将陷入维护的泥沼。那么有没有一种可以实时跟进数据库表变动，甚至允许不同类型数据库之间进行迁移，且容易维护的技术呢？</p>
+<p>下面演示如何使用 SqlAlchemy 为接口自动化测试服务：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@allure.title(<span class="params"><span class="string">&quot;标题&quot;</span></span>)</span></span><br><span class="line"><span class="meta">@pytest.mark.parametrize(<span class="params">data, read_file(<span class="params"><span class="string">&quot;...&quot;</span></span>)</span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_add_berth_plan</span>(<span class="params">self, data</span>):</span></span><br><span class="line">    <span class="comment"># 读取数据，根据实际需要更改内容</span></span><br><span class="line">    payload = data[<span class="string">&quot;payload&quot;</span>]</span><br><span class="line">    <span class="comment"># 读取或定义接口地址</span></span><br><span class="line">    url = data[<span class="string">&quot;url&quot;</span>]</span><br><span class="line">    <span class="comment"># 调用接口新增业务数据</span></span><br><span class="line">    res = self.post(url, json=payload)</span><br><span class="line">    res_json = res.json()</span><br><span class="line">    <span class="comment"># 校验状态码，建议使用响应体中的状态字段，防止误判</span></span><br><span class="line">    check.equal(<span class="built_in">int</span>(res_json[<span class="string">&quot;status&quot;</span>]), <span class="number">200</span>)</span><br><span class="line">    <span class="comment"># 反射航次表</span></span><br><span class="line">    Voyage = self.orm.tables.bps_voyage</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="comment"># 数据库根据航次号查询新增的航次数据, 使用one()确保没有重复航次名</span></span><br><span class="line">        plan = self.orm.select(Voyage).filter_by(voy_voyage=<span class="string">&#x27;B0607E&#x27;</span>).one()</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        self.logger.error(<span class="string">&quot;未查询到记录或有重复记录&quot;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="comment"># 若查询无误，将查询出的对象转换为字典格式</span></span><br><span class="line">        plan_dict = self.orm.to_dict(plan)</span><br><span class="line">        <span class="comment"># 校验数据库中写入的值是否符合预期</span></span><br><span class="line">        check.equal(plan_dict[<span class="string">&quot;voy_voyage&quot;</span>], payload[<span class="string">&quot;航次&quot;</span>])</span><br><span class="line">    <span class="comment"># 清理测试数据</span></span><br><span class="line">    <span class="keyword">with</span> self.orm.auto_commit():</span><br><span class="line">        <span class="comment"># 删除该数据并提交事务</span></span><br><span class="line">        self.orm.delete(plan)</span><br></pre></td></tr></table></figure>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Ave Bai</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://10185102110.github.io/2023/09/10/%E5%9F%BA%E4%BA%8ESqlAlchemy%E7%9A%84%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95%E6%96%B9%E6%A1%88/">http://10185102110.github.io/2023/09/10/%E5%9F%BA%E4%BA%8ESqlAlchemy%E7%9A%84%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95%E6%96%B9%E6%A1%88/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://10185102110.github.io" target="_blank">浮生孰来</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/">软件测试</a></div><div class="post_share"><div class="social-share" data-image="/img/default/14.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/09/18/Docker%E9%A9%B1%E5%8A%A8selenium-grid-4%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E6%B5%8B%E8%AF%95/"><img class="prev-cover" src="/img/default/9.jpg" onerror="onerror=null;src='/img/default.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Docker驱动Selenium-grid实现分布式测试</div></div></a></div><div class="next-post pull-right"><a href="/2023/05/16/JMeter%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95%E6%96%B9%E6%A1%88/"><img class="next-cover" src="/img/default/13.jpg" onerror="onerror=null;src='/img/default.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">JMeter压力测试方案</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/04/08/APP抓包配置/" title="APP抓包配置"><img class="cover" src="/img/default/3.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-04-08</div><div class="title">APP抓包配置</div></div></a></div><div><a href="/2023/09/18/Docker驱动selenium-grid-4实现分布式测试/" title="Docker驱动Selenium-grid实现分布式测试"><img class="cover" src="/img/default/9.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-18</div><div class="title">Docker驱动Selenium-grid实现分布式测试</div></div></a></div><div><a href="/2021/10/26/JMeter 实践/" title="JMeter实践"><img class="cover" src="/img/default/14.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-10-26</div><div class="title">JMeter实践</div></div></a></div><div><a href="/2023/05/16/JMeter压力测试方案/" title="JMeter压力测试方案"><img class="cover" src="/img/default/13.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-16</div><div class="title">JMeter压力测试方案</div></div></a></div><div><a href="/2021/10/20/fiddler抓包/" title="Fiddler抓包"><img class="cover" src="/img/default/4.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-10-20</div><div class="title">Fiddler抓包</div></div></a></div><div><a href="/2021/11/04/pytest 测试框架/" title="pytest 测试框架"><img class="cover" src="/img/default/0.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-11-04</div><div class="title">pytest 测试框架</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">一、概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%AE%89%E8%A3%85"><span class="toc-number">2.</span> <span class="toc-text">二、安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5"><span class="toc-number">3.</span> <span class="toc-text">三、数据库连接</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-PostgreSQL"><span class="toc-number">3.1.</span> <span class="toc-text">1. PostgreSQL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-MySQL"><span class="toc-number">3.2.</span> <span class="toc-text">2. MySQL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Oracle"><span class="toc-number">3.3.</span> <span class="toc-text">3. Oracle</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%A3%B0%E6%98%8E%E6%98%A0%E5%B0%84"><span class="toc-number">4.</span> <span class="toc-text">四、声明映射</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E5%8F%8D%E5%B0%84%EF%BC%88%E6%B5%8B%E8%AF%95%EF%BC%89"><span class="toc-number">5.</span> <span class="toc-text">五、反射（测试）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%AD%E3%80%81SQLAlchemy-%E5%85%B3%E9%94%AE%E5%AD%97"><span class="toc-number">6.</span> <span class="toc-text">六、SQLAlchemy 关键字</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E6%A1%86%E6%9E%B6%E6%BC%94%E7%A4%BA"><span class="toc-number">7.</span> <span class="toc-text">七、框架演示</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%AB%E3%80%81%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95"><span class="toc-number">8.</span> <span class="toc-text">八、接口自动化测试</span></a></li></ol></div></div></div></div></main><footer id="footer" style="background-image: url('/img/default/14.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Ave Bai</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    loader: {
+      source: {
+        '[tex]/amsCd': '[tex]/amscd'
+      }
+    },
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        addClass: [200,() => {
+          document.querySelectorAll('mjx-container:not([display=\'true\']').forEach( node => {
+            const target = node.parentNode
+            if (!target.classList.contains('has-jax')) {
+              target.classList.add('mathjax-overflow')
+            }
+          })
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><script>if (document.getElementsByClassName('mermaid').length) {
+  if (window.mermaidJsLoad) mermaid.init()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(() => {
+      window.mermaidJsLoad = true
+      mermaid.initialize({
+        theme: 'default',
+      })
+      false && mermaid.init()
+    })
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

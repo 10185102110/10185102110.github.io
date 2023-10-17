@@ -1,0 +1,366 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>自动化测试框架阶段性总结 | 浮生孰来</title><meta name="keywords" content="软件测试"><meta name="author" content="Ave Bai"><meta name="copyright" content="Ave Bai"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="[TOC] 自动化测试框架  XX公司 白士军  摘要： 在全面深化重点产业数字化转型的背景下，客户需求日益庞杂，软件项目团队不得不持续压缩软件从设计到发布的产品迭代周期。在软件开发的生命周期中，相较于开发阶段，似乎更愿意缩短测试周期，但软件交付的风险将难以避免。为满足项目团队在有限的时间和成本下交付高质量产品的需求，自动化测试应时而生。 本文探讨的是软件自动化测试框架的实现和部署，基于 Pyth">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自动化测试框架阶段性总结">
+<meta property="og:url" content="http://10185102110.github.io/2023/09/21/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6%E9%98%B6%E6%AE%B5%E6%80%A7%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="浮生孰来">
+<meta property="og:description" content="[TOC] 自动化测试框架  XX公司 白士军  摘要： 在全面深化重点产业数字化转型的背景下，客户需求日益庞杂，软件项目团队不得不持续压缩软件从设计到发布的产品迭代周期。在软件开发的生命周期中，相较于开发阶段，似乎更愿意缩短测试周期，但软件交付的风险将难以避免。为满足项目团队在有限的时间和成本下交付高质量产品的需求，自动化测试应时而生。 本文探讨的是软件自动化测试框架的实现和部署，基于 Pyth">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://10185102110.github.io/img/default/9.jpg">
+<meta property="article:published_time" content="2023-09-21T10:16:36.000Z">
+<meta property="article:modified_time" content="2023-10-17T12:02:48.990Z">
+<meta property="article:author" content="Ave Bai">
+<meta property="article:tag" content="软件测试">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://10185102110.github.io/img/default/9.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://10185102110.github.io/2023/09/21/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6%E9%98%B6%E6%AE%B5%E6%80%A7%E6%80%BB%E7%BB%93/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="baidu_site_verification"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?211d055ab9f6b88805047adca6ce783d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '自动化测试框架阶段性总结',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-10-17 20:02:48'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><link rel="stylesheet" href="/css/bilibili.css"><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="浮生孰来" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">44</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/picture/"><i class="fa-fw fas fa-camera"></i><span> 图库</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/default/9.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">浮生孰来</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/picture/"><i class="fa-fw fas fa-camera"></i><span> 图库</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">自动化测试框架阶段性总结</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-09-21T10:16:36.000Z" title="发表于 2023-09-21 18:16:36">2023-09-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-10-17T12:02:48.990Z" title="更新于 2023-10-17 20:02:48">2023-10-17</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/">软件测试</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>19分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="自动化测试框架阶段性总结"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>[TOC]</p>
+<h1 align = "center">自动化测试框架</h1>
+
+<h3 align = "center">XX公司 白士军</h3>
+
+<p><strong>摘要：</strong></p>
+<p>在全面深化重点产业数字化转型的背景下，客户需求日益庞杂，软件项目团队不得不持续压缩软件从设计到发布的产品迭代周期。在软件开发的生命周期中，相较于开发阶段，似乎更愿意缩短测试周期，但软件交付的风险将难以避免。为满足项目团队在有限的时间和成本下交付高质量产品的需求，自动化测试应时而生。</p>
+<p>本文探讨的是软件自动化测试框架的实现和部署，基于 Python 语言实现，结合 Selenium、Request、Pytest 等框架技术，完成支持 Web 端界面测试和接口测试的测试框架，通过搭建 Jenkins 平台进行持续集成。目前基于该框架实现的测试脚本运行正常，可以解决手工测试效率低、覆盖率低的问题，切实提高软件测试质量。</p>
+<p><strong>关键词：</strong>自动化测试、Selenium、Request</p>
+<h1 id="1-自动化测试概述"><a href="#1-自动化测试概述" class="headerlink" title="1 自动化测试概述"></a>1 自动化测试概述</h1><h2 id="1-1-自动化测试的概念"><a href="#1-1-自动化测试的概念" class="headerlink" title="1.1 自动化测试的概念"></a>1.1 自动化测试的概念</h2><p>IEEE 对软件测试的定义为：使用手工或者自动化的测试手段来运行或者测定某个系统的过程，其目的在于检验它是否能够满足规定的需求或者是弄清预期结果与实际结果之间的差别<sup>[1]</sup>。在整个软件产品从设计开始到发布之前，在这个软件的开发周期之内，都需要进行软件测试工作，其目的在于尽可能快地发现软件缺陷。</p>
+<p>自动化测试是指利用机器来代替手工劳动的过程，在无人值守的情况下<sup>[2]</sup>，通过程序控制机器来完成相应的测试工作。自动化测试的目的，就是减少手工测试，将我们的精力从繁琐的重复工作中解放出来，提高效率，进而增强对软件质量的保障。</p>
+<p>对于自动化测试，Cohn M 定义了一种三层的金字塔结构<sup>[3]</sup>，金字塔从下往上分别是单元测试、接口测试和界面测试，该结构形象地描述了在软件测试过程中这三种测试所占的比重。单元测试是代码的根基，占比最大；提供服务的接口只需通过输入输出即可完成测试，稳定易维护；界面测试则因为用户界面的频繁变更导致测试用例维护困难，所以比重最小。Lisa Crispin 针对这一特点，为自动化测试金字塔结构进行补充，增加了手工测试的“帽子”结构<sup>[4]</sup>，如图 1 所示。</p>
+<p><img src="1.png" alt=""></p>
+<p align = "center">图1 自动化测试分层结构</p>
+
+<h2 id="1-2-自动化测试的原则"><a href="#1-2-自动化测试的原则" class="headerlink" title="1.2 自动化测试的原则"></a>1.2 自动化测试的原则</h2><p>由于需求的不断变化，部分测试用例无法复用现成的测试脚本，这要求测试人员需要手动进行测试，而不能把所有的测试工作依赖于自动化测试脚本，因此在进行自动化测试的时候，必须要遵守一定的测试原则<sup>[5]</sup>，才能使得自动化测试起到预期的测试效果。</p>
+<p>(1).  自动化测试用例的范围集中体现在产品比较成熟稳定并且功能重复率比较高的测试上。</p>
+<p>在业务流程以及功能比较稳定的产品上，测试用例的重复率较高，因此手工测试耗时很多，自动化测试能明显提高效率。若是初期快速迭代的产品，需求频繁更改，自动化测试需要不断适配新的迭代版本，其本身的开发成本过高，此时追求自动化则是舍本逐末。</p>
+<p>(2).  自动化测试用例一般符合正向流程的测试。</p>
+<p>在手工测试时，测试人员通常根据需求说明书设计各种场景的测试用例，还要尽可能多地考虑异常情况。自动化测试优先选用正常的场景测试，为每个步骤设定预期结果，其他异常场景需要测试人员手工辅助测试。</p>
+<p>(3).  自动化测试不能取代手工测试。</p>
+<p>自动化测试脚本在本质上是将测试人员的能力固化下来，它是一种代码形式的测试用例，是测试人员进行需求分析、用例设计之后的产物，主要目的是减少重复繁冗的工作内容，使测试人员将有限的时间更多地投入到探索性测试。</p>
+<h2 id="1-3-自动化测试的流程"><a href="#1-3-自动化测试的流程" class="headerlink" title="1.3 自动化测试的流程"></a>1.3 自动化测试的流程</h2><p>虽然自动化测试与手工测试的实施手段不同，但同样遵循一定的测试周期。自动化测试通常以系统测试的完成作为启动节点，在可行性分析和需求分析之后制定测试计划，设计测试用例，开发测试脚本，准备测试数据，搭建测试环境，执行测试脚本并收集测试结果。如图 2 所示。</p>
+<p><img src="2.png" alt=""></p>
+<p align = "center">图2 自动化测试流程</p>
+
+<h1 id="2-相关技术介绍"><a href="#2-相关技术介绍" class="headerlink" title="2 相关技术介绍"></a>2 相关技术介绍</h1><h2 id="2-1-Selenium框架"><a href="#2-1-Selenium框架" class="headerlink" title="2.1 Selenium框架"></a>2.1 Selenium框架</h2><p>Selenium（<a target="_blank" rel="noopener" href="https://www.selenium.dev/zh-cn/documentation/）">https://www.selenium.dev/zh-cn/documentation/）</a> 是一个 Web 应用的开源自动化框架。主要应用于 Web 应用程序的自动化测试。通过它，测试工程师可以写出自动化程序，模拟人在浏览器里操作 Web 界面，比如点击界面按钮，在文本框中输入文字等操作。Selenium 支持 Chrome、Firefox、IE、Edge、Safari 等浏览器，支持 Linux、Windows、Mac 系统平台，支持录制、回放与脚本生成。其工作原理如图 3 所示。</p>
+<p><img src="3.png" alt=""></p>
+<p align = "center">图3 Selenium运行机制</p>
+
+<h2 id="2-2-Pytest框架"><a href="#2-2-Pytest框架" class="headerlink" title="2.2 Pytest框架"></a>2.2 Pytest框架</h2><p>Pytest（<a target="_blank" rel="noopener" href="https://docs.pytest.org/en/7.4.x/）">https://docs.pytest.org/en/7.4.x/）</a> 是一个第三方测试框架，用于编写和执行测试代码。它可以兼容 unittest 风格的测试用例，有丰富的插件，它支持 setup/teardown 或 fixture 两种风格进行测试用例的前后置操作，直接使用 Python 内置的 assert 断言，支持 html、Allure 测试报告。Pytest 允许并行运行多个测试，从而减少测试套件的执行时间；允许我们在执行期间跳过测试的子集；允许我们运行整个测试套件的一个子集。</p>
+<h2 id="2-3-SqlAlchemy框架"><a href="#2-3-SqlAlchemy框架" class="headerlink" title="2.3 SqlAlchemy框架"></a>2.3 SqlAlchemy框架</h2><p>SQLAlchemy（<a target="_blank" rel="noopener" href="https://docs.sqlalchemy.org/en/20/）">https://docs.sqlalchemy.org/en/20/）</a> 是一个基于 Python 实现的对象关系映射（Object Relational Mapping，ORM）框架，该框架建立在 Python DB API 之上，使用关系对象映射进行数据库操作。简单来说，就是不需要去写原生的 sql 语句，只需要用 Python 语法来操作对象就能自动映射为 sql 语句。SQLAlchemy 本身无法操作数据库，其必须使用第三方插件，通过数据库方言和数据库交互，然后数据库方言根据配置去调用指定的数据库 API 从而实现对数据库的操作。</p>
+<h2 id="2-4-Allure"><a href="#2-4-Allure" class="headerlink" title="2.4 Allure"></a>2.4 Allure</h2><p>Allure（<a target="_blank" rel="noopener" href="https://allurereport.org/docs/）">https://allurereport.org/docs/）</a> 是生成测试报告的开源工具，它在 Pytest 执行完生成的测试数据的基础上，对测试数据进行处理统计，生成简洁易读的测试报告。Allure 提供全局视野，优秀的模块化和可扩展性方便测试管理及 Bug 追踪，具有良好的视觉表现和交互性，从总览、类别、测试套件、功能、图形、时间轴等方面多维度展示测试信息。更重要的是，它支持定制测试报告，我们可以基于业务逻辑对测试用例归类，标记严重级别和详细的步骤说明。</p>
+<h2 id="2-5-Jenkins"><a href="#2-5-Jenkins" class="headerlink" title="2.5 Jenkins"></a>2.5 Jenkins</h2><p>Jenkins（<a target="_blank" rel="noopener" href="https://www.jenkins.io/zh/doc/）">https://www.jenkins.io/zh/doc/）</a> 是一款用于持续集成的开源工具。它运行在类似 Tomcat 的容器中，支持软件配置管理工具，可以执行基于 Gradle Build Tool 和 Apache Maven 的项目。通过调用 Shell 脚本或 Windows 批处理命令，Jenkins 能够快捷完成自动化任务的执行工作。Jenkins 的构建触发有多种方式，比较常用的是通过提交代码到 Git 或 SVN 等版本控制工具来触发，除此之外还支持通过预先配置的定时器实现任务的定时执行或周期执行。</p>
+<h1 id="3-自动化测试的框架设计"><a href="#3-自动化测试的框架设计" class="headerlink" title="3 自动化测试的框架设计"></a>3 自动化测试的框架设计</h1><h2 id="3-1-UI-测试"><a href="#3-1-UI-测试" class="headerlink" title="3.1 UI 测试"></a>3.1 UI 测试</h2><h3 id="3-1-1-模块化框架"><a href="#3-1-1-模块化框架" class="headerlink" title="3.1.1 模块化框架"></a>3.1.1 模块化框架</h3><p>传统的线性框架通过录制回放或者手动一行一行地完成测试脚本，这样做虽然简单易懂，但效率极低，也难以维护，如果被测系统有所变更，将会牵一发而动全身，因此我们需要对框架进行模块化设计。 </p>
+<p>模块化框架（Modular Framework）<sup>[6]</sup>是把基础方法和其他常用的方法封装起来以提高代码复用性和可维护性。例如最常见的登录和登出操作，几乎所有测试用例都会用到，那么我们可以将类似的操作封装起来统一调用，如果该功能更改，只维护同一个公共方法即可。</p>
+<p>模块化框架虽然解决了代码复用的痛点，但若是同一个测试用例，仅仅更换测试数据也要修改脚本，显然我们不能止步于此。</p>
+<h3 id="3-1-2-数据驱动框架"><a href="#3-1-2-数据驱动框架" class="headerlink" title="3.1.2 数据驱动框架"></a>3.1.2 数据驱动框架</h3><p>数据驱动框架（Data-driven Framework）<sup>[7]</sup>将代码和数据分离，数据单独存放，用数据驱动测试脚本，动态生成测试用例并执行。一般情况下，测试数据存放在 Excel、Json、Yaml 等文件中，测试数据即包含用例输入，也包含期望结果。如此一来，仅更改测试数据将无需修改脚本，通过将输入数据参数化，可以实现测试用例的复用，从而提高测试效率和质量。该框架原理如图 4 所示。</p>
+<p><img src="4.png" alt=""></p>
+<p align = "center">图4 数据驱动框架原理</p>
+
+<h3 id="3-1-3-关键字驱动框架"><a href="#3-1-3-关键字驱动框架" class="headerlink" title="3.1.3 关键字驱动框架"></a>3.1.3 关键字驱动框架</h3><p>关键字驱动框架（Keyword-driven Framework）<sup>[8]</sup>是数据驱动框架地改进和补充，基本原理是在脚本与数据分离之后，将脚本二次分离，形成所谓的行为代码与测试代码，然后经由数据文件驱动行为代码，从而生成测试代码。关键字驱动需要我们根据测试用例定义关键字，并使其与相应的动作或方法关联起来。而这里的关键字主要有三类: 被操作对象(item)、操作(operation)和值(value)，面向对象的形式表现为 <code>item.operation(value)</code> 。</p>
+<p>关键字驱动框架地实现方法类似于积木，对页面元素进行拆分和组装，最小颗粒度的操作可以视为一个关键字，可以直接使用，也可以将几个关键字组装成为一个大关键字，像搭积木一样搭建自动化测试，如图 5 所示。</p>
+<p><img src="5.png" alt=""></p>
+<p align = "center">图5 关键字驱动-登录示例</p>
+
+<h3 id="3-1-4-混合驱动的PO设计模式"><a href="#3-1-4-混合驱动的PO设计模式" class="headerlink" title="3.1.4 混合驱动的PO设计模式"></a>3.1.4 混合驱动的PO设计模式</h3><p>综合上述几种测试框架，在数据驱动和关键字驱动的基础上，我们引入 PO（Page Object）设计模式<sup>[9]</sup>来实现最终的 UI 自动化测试框架。该框架采用模块化设计，实现页面元素与业务逻辑的分离、测试数据与测试脚本的分离，使得测试脚本更加易读、易维护和易于拓展，降低代码耦合性，可有效提高测试效率和质量。</p>
+<p>PO 模式的核心思想是分层，如图6所示。对象库层封装基础方法，如 Selenium 的原生 api、日志、文件读写等方法；页面操作层定义关键字，如 DOM<sup>[10]</sup>树中元素的定位、获取、操作等；测试用例层则根据业务逻辑调用一个或多个关键字组合成测试用例，并在该层设置测试执行入口。 </p>
+<p><img src="6.png" alt=""></p>
+<p align = "center">图6 PO模式分层及项目结构</p>
+
+<p>PO 模式的理念是将待测页面当作一个页面对象，包含页面元素的定位和元素操作，以此实现页面对象和真实页面的映射关系。</p>
+<p>测试用例如表 1 所示，测试结果判断流程如图7所示。在执行过程中，如果发生预期之外的脚本代码错误，则抛出异常并结束测试；若正常执行，则依次判断断言是否成功以及实际结果是否符合预期，若全部符合则代表测试通过，若不符合则测试不通过，执行完指定的全部测试用例后，将测试结果写入日志，并生成 Allure 测试报告。测试报告如图 8 所示。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@allure.story(<span class="params"><span class="string">&#x27;四、外贸进货流程&#x27;</span></span>)</span></span><br><span class="line"><span class="meta">@allure.title(<span class="params"><span class="string">&#x27;1.新增外贸进货受理&#x27;</span></span>)</span></span><br><span class="line"><span class="meta">@pytest.mark.parametrize(<span class="params"><span class="string">&quot;test_input&quot;</span>, read_yaml(<span class="params">os.path.join(<span class="params">os.getcwd(<span class="params"></span>), <span class="string">&#x27;04_delivergoods.yaml&#x27;</span></span>)</span>)</span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_add_acceptance</span>(<span class="params">driver, test_input</span>):</span></span><br><span class="line">    menu = BtosMenu(driver)</span><br><span class="line">    menu.select_level2_menu(<span class="string">&#x27;业务受理&#x27;</span>, <span class="string">&#x27;外贸进货受理&#x27;</span>)</span><br><span class="line">    accept = OutExportAcceptance(driver)</span><br><span class="line">    accept.add_acceptance_information(test_input)</span><br><span class="line">    accept.check_acceptance(test_input)</span><br><span class="line">    accept.check_saved_good(test_input)</span><br><span class="line">    Tag(driver).closeTag(<span class="string">&quot;外贸进货受理&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p align = "center">表1 UI 测试用例实例</p>
+
+
+
+<p><img src="7.png" alt=""></p>
+<p align = "center">图7 测试结果判断流程图</p>
+
+
+
+<p><img src="8.png" alt=""></p>
+<p align = "center">图8 测试报告</p>
+
+<h2 id="3-2-接口测试"><a href="#3-2-接口测试" class="headerlink" title="3.2 接口测试"></a>3.2 接口测试</h2><h3 id="3-2-1-基于SqlAlchemy的数据库校验方案"><a href="#3-2-1-基于SqlAlchemy的数据库校验方案" class="headerlink" title="3.2.1 基于SqlAlchemy的数据库校验方案"></a>3.2.1 基于SqlAlchemy的数据库校验方案</h3><p>对于业务接口测试，我们往往会校验接口传参是否正确，接口是否请求成功以及请求结果是否符合预期。</p>
+<p>如果要验证某个接口的执行结果或者返回结果是否正确，首先我们会想到校验请求的状态码，通常 200 代表请求正常、401 代表认证失败、500 代表后端错误等等；但是 200 仅代表没有报错，无法保证业务逻辑的正确性，500 也不代表服务异常，它可能是后端进行的错误处理。为了更精确地判断接口是否按照预期执行，可以通过响应体中的 data 部分进行字段的正确性校验。然而不是所有接口都会返回 data，确切地说，可能返回的只是“data=true”，我们无法得知数据处理是否正确。进一步，我们可以通过编写 sql 语句来应对接口不返回业务数据的情况：</p>
+<ul>
+<li>对于一个 GET 请求，我们希望验证响应结果的数据量或者某条数据的正确性；</li>
+<li>对于一个 POST 新增请求，我们希望验证写入数据库的真实数据的正确性、是否存在漏写等问题；</li>
+<li>对于一个 PUT/POST 修改请求，我们希望验证修改的数据在数据库中是否正确变更；</li>
+<li>对于一个 DELETE/POST 删除请求，我们希望验证某条数据是否真正在数据库中被抹除，或是由于修改状态标记而被隐藏。</li>
+</ul>
+<p>接口自动化测试的流程如图 9 所示。一般情况下，我们使用参数化的手段生成测试用例，对接口进行三步校验。首先校验状态码，验证接口是否请求成功；然后验证响应体中的数据；最后验证数据库的更改，全部通过才能说明接口的功能正常。</p>
+<p><img src="9.png" alt=""></p>
+<p align = "center">图9 接口自动化测试流程</p>
+
+<p>考虑到实际应用，如果需要编写大量 sql 语句，且研发迭代的过程中数据库表结构会发生更改，随着自动化用例的规模增长，我们将陷入维护的泥沼。SqlAlchemy 是一种可以实时跟进数据库表变动，甚至允许不同类型数据库之间进行迁移，且容易维护的技术，它可以有效提升编写和维护 sql 语句的效率。表 2 是一个接口测试用例的示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@allure.title(<span class="params"><span class="string">&quot;标题&quot;</span></span>)</span></span><br><span class="line"><span class="meta">@pytest.mark.parametrize(<span class="params">data, read_file(<span class="params"><span class="string">&quot;...&quot;</span></span>)</span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_add_berth_plan</span>(<span class="params">self, data</span>):</span></span><br><span class="line">    <span class="comment"># 读取数据，根据实际需要更改内容</span></span><br><span class="line">    payload = data[<span class="string">&quot;payload&quot;</span>]</span><br><span class="line">    <span class="comment"># 读取或定义接口地址</span></span><br><span class="line">    url = data[<span class="string">&quot;url&quot;</span>]</span><br><span class="line">    <span class="comment"># 调用接口新增业务数据</span></span><br><span class="line">    res = self.post(url, json=payload)</span><br><span class="line">    res_json = res.json()</span><br><span class="line">    <span class="comment"># 校验状态码，建议使用响应体中的状态字段，防止误判</span></span><br><span class="line">    check.equal(<span class="built_in">int</span>(res_json[<span class="string">&quot;status&quot;</span>]), <span class="number">200</span>)</span><br><span class="line">    <span class="comment"># 反射航次表</span></span><br><span class="line">    Voyage = self.orm.tables.bps_voyage</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="comment"># 数据库根据航次号查询新增的航次数据</span></span><br><span class="line">        plan = self.orm.select(Voyage).filter_by(voy_voyage=<span class="string">&#x27;B0607E&#x27;</span>).one()</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        self.logger.error(<span class="string">&quot;未查询到记录或有重复记录&quot;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="comment"># 若查询无误，将查询出的对象转换为字典格式</span></span><br><span class="line">        plan_dict = self.orm.to_dict(plan)</span><br><span class="line">        <span class="comment"># 校验数据库中写入的值是否符合预期</span></span><br><span class="line">        check.equal(plan_dict[<span class="string">&quot;voy_voyage&quot;</span>], payload[<span class="string">&quot;航次&quot;</span>])</span><br><span class="line">    <span class="comment"># 清理测试数据</span></span><br><span class="line">    <span class="keyword">with</span> self.orm.auto_commit():</span><br><span class="line">        <span class="comment"># 删除该数据并提交事务</span></span><br><span class="line">        self.orm.delete(plan)</span><br></pre></td></tr></table></figure>
+<p align = "center">表2 接口测试用例示例</p>
+
+<h3 id="3-2-2-基于组合唯一键的数据验证方案"><a href="#3-2-2-基于组合唯一键的数据验证方案" class="headerlink" title="3.2.2 基于组合唯一键的数据验证方案"></a>3.2.2 基于组合唯一键的数据验证方案</h3><p>业务报表对应的查询接口，也即涉及数据统计的接口，通常具有复杂的统计逻辑，在大量数据中我们无法轻易得知正确的返回结果，因此普通的验证方法很难奏效。但是报表都会有标准的统计口径，比如以航次为单位统计，按照内外贸区分，展示哪些字段等等。在充分了解报表需求的前提下，我们可以自行编写 sql 查询语句进行统计，然后与接口的返回结果比对。</p>
+<p>数据统计接口的返回体是 Json 结构，结构体一般包含大量同样结构的数据，我们选取其中部分字段作为组合唯一键，确保这个组合在结构体中必然出现且只出现一次。同样地，测试人员编写的 sql 语句也要遵循该组合的唯一性原则。最终，在测试框架内，我们调用数据应用层的数据统计 API，同时连接数据仓库的数据引入层（ODS）执行测试 sql 语句，将二者结果转换为同一格式，再用组合唯一键在两个结构体中进行匹配，校验数据量是否相同，以及唯一键之外的字段是否正确。该方案的整体结构如图 10 所示。</p>
+<p><img src="10.png" alt=""></p>
+<p align = "center">图10 数据仓库验证方案</p>
+
+<h1 id="4-持续集成与持续测试"><a href="#4-持续集成与持续测试" class="headerlink" title="4 持续集成与持续测试"></a>4 持续集成与持续测试</h1><p>随着敏捷模式下软件研发的迭代周期越来越短，持续测试（CT）越来越重要。我们需要持续不间断地对保障软件产品质量，靠人力是行不通的，因此必须构建无人值守的自动化测试运行机制。持续测试的前提是持续集成（CI）<sup>[11]</sup>，即开发人员每次提交代码，对整个系统自动构建，并对其执行全面的自动化测试，根据构建和测试结果确定新代码是否正确集成。自动化测试的持续集成流程如图 11 所示。</p>
+<p><img src="11.png" alt=""></p>
+<p align = "center">图11 持续集成流程图</p>
+
+<p>完成初步测试后，开发人员将集成后的代码部署到类生产环境，确保可以可持续的方式快速向客户发布新版本，这被称为持续交付（CDE）。</p>
+<p>在持续集成和持续交付的阶段中，开发人员需要进行单元测试（UT），测试团队可以依次进行低等级测试（LLT）、高等级测试（HLT）及系统测试。如图 12 所示。</p>
+<p><img src="12.png" alt=""></p>
+<p align = "center">图12 持续测试流程图</p>
+
+<h1 id="5-总结与展望"><a href="#5-总结与展望" class="headerlink" title="5 总结与展望"></a>5 总结与展望</h1><h2 id="5-1-成果总结"><a href="#5-1-成果总结" class="headerlink" title="5.1 成果总结"></a>5.1 成果总结</h2><p>我们已经完成界面测试和接口测试的框架研发，并且应用到集装箱系统和散件杂货系统的脚本开发，目前运行稳定。在此基础上，实现了基于 TFS 代码管理平台和 Jenkins 服务器的自动化测试持续集成，如图 13 所示。我们可以根据项目需求设定无人值守的测试模式，可指定测试范围并在测试结束后统一查看运行日志和可视化的测试报告。</p>
+<p><img src="13.png" alt=""></p>
+<p align = "center">图13 Jenkins流水线示例</p>
+
+<p>作为对比，不同手段完成一套完整业务流程和各种数据项校验所需的时间成本如表3所示。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th><strong>测试方式</strong></th>
+<th><strong>用时估算</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UI手工测试</td>
+<td>&gt;40min</td>
+</tr>
+<tr>
+<td>UI自动化测试</td>
+<td>5min ~ 15min</td>
+</tr>
+<tr>
+<td>接口自动化测试</td>
+<td>&lt;5min</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p align = "center">表3 手工测试与自动化测试用时对比</p>
+
+<p>随着前后端开发规范的逐渐统一，我们的测试框架需要持续维护、调优，逐步提高自动化测试在测试工作中的比重，争取各项目团队对自动化测试的支持和信任。</p>
+<h2 id="5-2-未来计划"><a href="#5-2-未来计划" class="headerlink" title="5.2 未来计划"></a>5.2 未来计划</h2><h3 id="5-2-1-兼容性测试"><a href="#5-2-1-兼容性测试" class="headerlink" title="5.2.1 兼容性测试"></a>5.2.1 兼容性测试</h3><p>随着系统架构从 C/S 全面转向 B/S，同时在国产化适配的背景下，软件系统对于操作系统和浏览器的兼容性测试愈发重要。传统的兼容性测试需要测试人员在每套环境下做重复的功能测试，这样做显然性价比过低，因此我们往往忽略兼容性测试。为解决这一问题，我们设想基于 Docker 容器部署 Selenium-grid 服务来做分布式测试。</p>
+<p>Selenium-grid 提供一种在多台机器上并行运行测试的简单方法，通过将客户端发送的命令路由到远程浏览器实例，在远程机器上执行 Webdriver 脚本。其运行机制如图14所示，它允许我们启动跨平台的不同浏览器版本上的测试。</p>
+<p><img src="14.png" alt=""></p>
+<p align = "center">图14 Selenium-grid架构</p>
+
+<h3 id="5-2-2-移动端测试"><a href="#5-2-2-移动端测试" class="headerlink" title="5.2.2 移动端测试"></a>5.2.2 移动端测试</h3><p>除了 Web 端的后台系统，各项目通常配套开发手持机 App，它们在版本稳定之后同样需要自动化测试。我们计划采用 Appium 的技术路线，在主机上安装 Appium 客户端和服务器，提供 Appium 服务，并监听端口，发送指令到移动设备，移动设备执行自动化操作。目前已完成环境配置，预备进行框架研发。大致运行机制如图 15 所示。</p>
+<p><img src="15.png" alt=""></p>
+<p align = "center">图15 移动端自动化测试机制</p>
+
+<h1 id="6-参考文献"><a href="#6-参考文献" class="headerlink" title="6 参考文献"></a>6 参考文献</h1><p>[1]   朱少民. 软件测试方法和技术[M]. 第二版.北京: 清华出版社, 2012:5-6.</p>
+<p>[2]   Dorthy Graham,Mark Fewster.Experiences of Test Automation[M]. Boston:Addison-Wesley Education Publishers.</p>
+<p>[3]   Cohn M .Succeeding with Agile: Software Development Using Scrum[J].Addison-Wesley Professional, 2010.</p>
+<p>[4]   Crispin L , Gregory J .Agile Testing: A Practical Guide for Testers and Agile Teams[J].pearson schweiz ag, 2009. Gregory J.Agile Testing: A Practical Guide for Testers and Agile Teams[M].Addison-Wesley,2009.</p>
+<p>[5]   李玮.软件自动化测试混合框架的研究与实现[D].北京交通大学,2007.DOI:CNKI:CDMD:2.2007.048355.</p>
+<p>[6]   Wu Y , Offutt J .Modeling and Testing Web-based Applications[J].george mason university, 2002.DOI:10.1021/bk-2007-0970.ch012.</p>
+<p>[7]   朱菊,王志坚,杨雪.基于数据驱动的软件自动化测试框架[J].计算机技术与发展, 2006, 16(5):3.DOI:CNKI:SUN:WJFZ.0.2006-05-023.</p>
+<p>[8]   接卉,兰雨晴,骆沛.一种关键字驱动的自动化测试框架[J].计算机应用研究, 2009(3):3.DOI:10.3969/j.issn.1001-3695.2009.03.039.</p>
+<p>[9]   Yu B , Ma L , Zhang C .Incremental Web Application Testing Using Page Object[C]//IEEE Workshop on Hot Topics in Web Systems &amp; Technologies.IEEE Computer Society, 2015.DOI:10.1109/HotWeb.2015.14.</p>
+<p>[10] Hors A L , Wood L , Nicol G ,et al.Document Object Model (DOM) Level 2 HTML Specification[J]. 2004.DOI:10.1016/0963-8695(92)90491-X.</p>
+<p>[11] 陶镇威.基于Jenkins的持续集成研究与应用[D].华南理工大学[2023-10-05].DOI:CNKI:CDMD:2.1013.150629.</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Ave Bai</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://10185102110.github.io/2023/09/21/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6%E9%98%B6%E6%AE%B5%E6%80%A7%E6%80%BB%E7%BB%93/">http://10185102110.github.io/2023/09/21/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6%E9%98%B6%E6%AE%B5%E6%80%A7%E6%80%BB%E7%BB%93/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://10185102110.github.io" target="_blank">浮生孰来</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/">软件测试</a></div><div class="post_share"><div class="social-share" data-image="/img/default/9.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2023/09/18/Docker%E9%A9%B1%E5%8A%A8selenium-grid-4%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E6%B5%8B%E8%AF%95/"><img class="next-cover" src="/img/default/9.jpg" onerror="onerror=null;src='/img/default.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Docker驱动Selenium-grid实现分布式测试</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/04/08/APP抓包配置/" title="APP抓包配置"><img class="cover" src="/img/default/3.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-04-08</div><div class="title">APP抓包配置</div></div></a></div><div><a href="/2023/09/18/Docker驱动selenium-grid-4实现分布式测试/" title="Docker驱动Selenium-grid实现分布式测试"><img class="cover" src="/img/default/9.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-18</div><div class="title">Docker驱动Selenium-grid实现分布式测试</div></div></a></div><div><a href="/2021/10/26/JMeter 实践/" title="JMeter实践"><img class="cover" src="/img/default/14.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-10-26</div><div class="title">JMeter实践</div></div></a></div><div><a href="/2023/05/16/JMeter压力测试方案/" title="JMeter压力测试方案"><img class="cover" src="/img/default/13.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-16</div><div class="title">JMeter压力测试方案</div></div></a></div><div><a href="/2021/10/20/fiddler抓包/" title="Fiddler抓包"><img class="cover" src="/img/default/4.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-10-20</div><div class="title">Fiddler抓包</div></div></a></div><div><a href="/2021/11/04/pytest 测试框架/" title="pytest 测试框架"><img class="cover" src="/img/default/0.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-11-04</div><div class="title">pytest 测试框架</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">自动化测试框架</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.0.1.</span> <span class="toc-text">XX公司 白士军</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%A6%82%E8%BF%B0"><span class="toc-number">2.</span> <span class="toc-text">1 自动化测试概述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">2.1.</span> <span class="toc-text">1.1 自动化测试的概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E7%9A%84%E5%8E%9F%E5%88%99"><span class="toc-number">2.2.</span> <span class="toc-text">1.2 自动化测试的原则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E7%9A%84%E6%B5%81%E7%A8%8B"><span class="toc-number">2.3.</span> <span class="toc-text">1.3 自动化测试的流程</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E7%9B%B8%E5%85%B3%E6%8A%80%E6%9C%AF%E4%BB%8B%E7%BB%8D"><span class="toc-number">3.</span> <span class="toc-text">2 相关技术介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-Selenium%E6%A1%86%E6%9E%B6"><span class="toc-number">3.1.</span> <span class="toc-text">2.1 Selenium框架</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-Pytest%E6%A1%86%E6%9E%B6"><span class="toc-number">3.2.</span> <span class="toc-text">2.2 Pytest框架</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-SqlAlchemy%E6%A1%86%E6%9E%B6"><span class="toc-number">3.3.</span> <span class="toc-text">2.3 SqlAlchemy框架</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-Allure"><span class="toc-number">3.4.</span> <span class="toc-text">2.4 Allure</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-5-Jenkins"><span class="toc-number">3.5.</span> <span class="toc-text">2.5 Jenkins</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E7%9A%84%E6%A1%86%E6%9E%B6%E8%AE%BE%E8%AE%A1"><span class="toc-number">4.</span> <span class="toc-text">3 自动化测试的框架设计</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-UI-%E6%B5%8B%E8%AF%95"><span class="toc-number">4.1.</span> <span class="toc-text">3.1 UI 测试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-1-%E6%A8%A1%E5%9D%97%E5%8C%96%E6%A1%86%E6%9E%B6"><span class="toc-number">4.1.1.</span> <span class="toc-text">3.1.1 模块化框架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-2-%E6%95%B0%E6%8D%AE%E9%A9%B1%E5%8A%A8%E6%A1%86%E6%9E%B6"><span class="toc-number">4.1.2.</span> <span class="toc-text">3.1.2 数据驱动框架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-3-%E5%85%B3%E9%94%AE%E5%AD%97%E9%A9%B1%E5%8A%A8%E6%A1%86%E6%9E%B6"><span class="toc-number">4.1.3.</span> <span class="toc-text">3.1.3 关键字驱动框架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-4-%E6%B7%B7%E5%90%88%E9%A9%B1%E5%8A%A8%E7%9A%84PO%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="toc-number">4.1.4.</span> <span class="toc-text">3.1.4 混合驱动的PO设计模式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95"><span class="toc-number">4.2.</span> <span class="toc-text">3.2 接口测试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-1-%E5%9F%BA%E4%BA%8ESqlAlchemy%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93%E6%A0%A1%E9%AA%8C%E6%96%B9%E6%A1%88"><span class="toc-number">4.2.1.</span> <span class="toc-text">3.2.1 基于SqlAlchemy的数据库校验方案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-2-%E5%9F%BA%E4%BA%8E%E7%BB%84%E5%90%88%E5%94%AF%E4%B8%80%E9%94%AE%E7%9A%84%E6%95%B0%E6%8D%AE%E9%AA%8C%E8%AF%81%E6%96%B9%E6%A1%88"><span class="toc-number">4.2.2.</span> <span class="toc-text">3.2.2 基于组合唯一键的数据验证方案</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90%E4%B8%8E%E6%8C%81%E7%BB%AD%E6%B5%8B%E8%AF%95"><span class="toc-number">5.</span> <span class="toc-text">4 持续集成与持续测试</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-%E6%80%BB%E7%BB%93%E4%B8%8E%E5%B1%95%E6%9C%9B"><span class="toc-number">6.</span> <span class="toc-text">5 总结与展望</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-%E6%88%90%E6%9E%9C%E6%80%BB%E7%BB%93"><span class="toc-number">6.1.</span> <span class="toc-text">5.1 成果总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2-%E6%9C%AA%E6%9D%A5%E8%AE%A1%E5%88%92"><span class="toc-number">6.2.</span> <span class="toc-text">5.2 未来计划</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-1-%E5%85%BC%E5%AE%B9%E6%80%A7%E6%B5%8B%E8%AF%95"><span class="toc-number">6.2.1.</span> <span class="toc-text">5.2.1 兼容性测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-2-%E7%A7%BB%E5%8A%A8%E7%AB%AF%E6%B5%8B%E8%AF%95"><span class="toc-number">6.2.2.</span> <span class="toc-text">5.2.2 移动端测试</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-number">7.</span> <span class="toc-text">6 参考文献</span></a></li></ol></div></div></div></div></main><footer id="footer" style="background-image: url('/img/default/9.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Ave Bai</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    loader: {
+      source: {
+        '[tex]/amsCd': '[tex]/amscd'
+      }
+    },
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        addClass: [200,() => {
+          document.querySelectorAll('mjx-container:not([display=\'true\']').forEach( node => {
+            const target = node.parentNode
+            if (!target.classList.contains('has-jax')) {
+              target.classList.add('mathjax-overflow')
+            }
+          })
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><script>if (document.getElementsByClassName('mermaid').length) {
+  if (window.mermaidJsLoad) mermaid.init()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(() => {
+      window.mermaidJsLoad = true
+      mermaid.initialize({
+        theme: 'default',
+      })
+      false && mermaid.init()
+    })
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
