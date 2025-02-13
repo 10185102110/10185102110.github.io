@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://10185102110.github.io/2025/02/13/Docker+Ubuntu%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2DeepSeek/</loc>
+    
+    <lastmod>2025-02-13</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://10185102110.github.io/2023/07/10/APP%E8%87%AA%E5%8A%A8%E5%8C%96%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</loc>
     
     <lastmod>2023-10-19</lastmod>
@@ -38,13 +45,6 @@
   
   <url>
     <loc>http://10185102110.github.io/2021/06/28/SQL%20%E6%B3%A8%E5%85%A5%E4%B8%8E%20XSS/</loc>
-    
-    <lastmod>2023-10-17</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://10185102110.github.io/2023/09/21/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6%E9%98%B6%E6%AE%B5%E6%80%A7%E6%80%BB%E7%BB%93/</loc>
     
     <lastmod>2023-10-17</lastmod>
     
@@ -389,7 +389,7 @@
 
   <url>
     <loc>http://10185102110.github.io/</loc>
-    <lastmod>2023-10-19</lastmod>
+    <lastmod>2025-02-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -397,77 +397,84 @@
   
   <url>
     <loc>http://10185102110.github.io/tags/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/</loc>
-    <lastmod>2023-10-19</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://10185102110.github.io/tags/C/</loc>
-    <lastmod>2023-10-19</lastmod>
+    <lastmod>2025-02-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://10185102110.github.io/tags/Server/</loc>
-    <lastmod>2023-10-19</lastmod>
+    <lastmod>2025-02-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://10185102110.github.io/tags/Java/</loc>
-    <lastmod>2023-10-19</lastmod>
+    <loc>http://10185102110.github.io/tags/C/</loc>
+    <lastmod>2025-02-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://10185102110.github.io/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/</loc>
+    <lastmod>2025-02-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://10185102110.github.io/tags/MySQL/</loc>
-    <lastmod>2023-10-19</lastmod>
+    <lastmod>2025-02-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://10185102110.github.io/tags/Java/</loc>
+    <lastmod>2025-02-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://10185102110.github.io/tags/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/</loc>
-    <lastmod>2023-10-19</lastmod>
+    <lastmod>2025-02-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://10185102110.github.io/tags/SpringBoot/</loc>
-    <lastmod>2023-10-19</lastmod>
+    <lastmod>2025-02-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://10185102110.github.io/tags/Hexo/</loc>
-    <lastmod>2023-10-19</lastmod>
+    <lastmod>2025-02-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://10185102110.github.io/tags/Tracker/</loc>
-    <lastmod>2023-10-19</lastmod>
+    <lastmod>2025-02-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://10185102110.github.io/tags/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/</loc>
-    <lastmod>2023-10-19</lastmod>
+    <lastmod>2025-02-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://10185102110.github.io/tags/Python/</loc>
-    <lastmod>2023-10-19</lastmod>
+    <lastmod>2025-02-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -476,70 +483,77 @@
   
   <url>
     <loc>http://10185102110.github.io/categories/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/</loc>
-    <lastmod>2023-10-19</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://10185102110.github.io/categories/C/</loc>
-    <lastmod>2023-10-19</lastmod>
+    <lastmod>2025-02-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://10185102110.github.io/categories/Server/</loc>
-    <lastmod>2023-10-19</lastmod>
+    <lastmod>2025-02-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://10185102110.github.io/categories/Java/</loc>
-    <lastmod>2023-10-19</lastmod>
+    <loc>http://10185102110.github.io/categories/C/</loc>
+    <lastmod>2025-02-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://10185102110.github.io/categories/%E5%A4%A7%E6%A8%A1%E5%9E%8B/</loc>
+    <lastmod>2025-02-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://10185102110.github.io/categories/MySQL/</loc>
-    <lastmod>2023-10-19</lastmod>
+    <lastmod>2025-02-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://10185102110.github.io/categories/Java/</loc>
+    <lastmod>2025-02-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://10185102110.github.io/categories/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/</loc>
-    <lastmod>2023-10-19</lastmod>
+    <lastmod>2025-02-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://10185102110.github.io/categories/SpringBoot/</loc>
-    <lastmod>2023-10-19</lastmod>
+    <lastmod>2025-02-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://10185102110.github.io/categories/Hexo/</loc>
-    <lastmod>2023-10-19</lastmod>
+    <lastmod>2025-02-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://10185102110.github.io/categories/Tracker/</loc>
-    <lastmod>2023-10-19</lastmod>
+    <lastmod>2025-02-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://10185102110.github.io/categories/Python/</loc>
-    <lastmod>2023-10-19</lastmod>
+    <lastmod>2025-02-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
